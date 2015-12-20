@@ -23,33 +23,33 @@ public class Scenario {
             ;
         mStartYear = 2015;
         mEndYear = 2047;
-        nInterestIncomeRate = 0.01;
+        nInterestIncomeRate = 0.010;
     }
 
     public void run() {
         print();
 
-        print(String.format("%4s %10s %10s %10s %10s %10s",
-                "Year", "Pile", "SSA Inc", "Work Inc", "Net Inc", "Expenses"));
+        print(String.format("%4s %10s %10s %10s %10s %10s %10s %10s",
+                "Year", "Inv", "Inv Inc", "SSA Inc", "Work Inc", "Net Inc", "Expenses", "Net"));
 
         for (int year = mStartYear; year < mEndYear; ++year) {
             double investmentGain = mInvestmentValue * nInterestIncomeRate;
 
+            double workIncome = getIncome (year, "mike") + getIncome(year, "noga");
+
             double ssaIncome = getSSAIncome(year, "mike") + getSSAIncome(year, "noga");
 
-            double income = getIncome (year, "mike") + getIncome(year, "noga");
-
-            double netIncome = getNetIncome (investmentGain, ssaIncome, income);
+            double netIncome = getNetIncome (investmentGain, ssaIncome, workIncome);
 
             double expenses = getExpenses (year);
 
-            double incomeShortfall = netIncome - expenses;
+            double gainLoss = netIncome - expenses;
 
-            print(String.format("%4d %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f",
-                    year, mInvestmentValue, ssaIncome, income, netIncome, expenses, incomeShortfall));
+            print(String.format("%4d %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f",
+                    year, mInvestmentValue, investmentGain, ssaIncome, workIncome, netIncome, expenses, gainLoss));
 
             mInvestmentValue += investmentGain;
-            mInvestmentValue -= incomeShortfall;
+            mInvestmentValue += gainLoss;
         }
     }
 
@@ -130,10 +130,10 @@ public class Scenario {
         new ExpenseRec (2015, (6000 * 12) + 15000),     // kids plus Tal in school sophmore
         new ExpenseRec (2016, (6000 * 12) + 15000),     // kids plus Tal in school junior
         new ExpenseRec (2017, (6000 * 12) + 15000),     // kids plus Tal in school senior
-        new ExpenseRec (2018, (6000 * 12) + 30000),     // no kids guys in school freshmen
-        new ExpenseRec (2019, (6000 * 12) + 30000),     // no kids guys in school soph
-        new ExpenseRec (2020, (6000 * 12) + 30000),     // no kids guys in school junior
-        new ExpenseRec (2021, (6000 * 12) + 30000),     // no kids guys in school senior
+        new ExpenseRec (2018, (8000 * 12) + 30000),     // no kids guys in school freshmen
+        new ExpenseRec (2019, (8000 * 12) + 30000),     // no kids guys in school soph
+        new ExpenseRec (2020, (8000 * 12) + 30000),     // no kids guys in school junior
+        new ExpenseRec (2021, (8000 * 12) + 30000),     // no kids guys in school senior
 
         new ExpenseRec (2022, (6000 * 12) + 6000),     // no kids bit of help
         new ExpenseRec (2023, (6000 * 12) + 6000),     // no kids bit of help
