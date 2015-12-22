@@ -70,12 +70,7 @@ class MRDTable {
         this.lifeExpectancy = le;
     }
 
-    public static double getIRAMRDLifeExpectancy(int age) {
-
-        if (age < 70) {
-            // @TODO missing MRD support for inherited IRAs
-            return -1.0;
-        }
+    public static double getIRAMRDLifeExpectancy(int age) throws Exception {
 
         if (age > 115)
             return MRDAges[MRDAges.length].lifeExpectancy;
@@ -84,24 +79,21 @@ class MRDTable {
             if (i.age == age)
                 return i.lifeExpectancy;
 
-        assert false;
-        return 0.0;
+        throw new Exception("error in getIRAMRDLifeExpectancy");
     }
 
-    static public double getMRD(int age, double value) {
+    static public double getMRD(int age, Account account) throws Exception {
         if (age >= 70) {
             double lifeExp = getIRAMRDLifeExpectancy(age);
-            if (lifeExp > 0.0) {
-                double mrd = value / lifeExp;
-                return mrd;
-            }
+            return account.getBalance() / lifeExp;
         }
-        // too young, inherited IRA MRD
-        // @TODO
-        if (value > 0.0)
-            return 2100 * 4.0;
-        else
-            return 0.0;
+
+        if (account.getType().equals(Account.AccountType.InheritedTraditionalIRA)) {
+            // @ TODO 70?
+            double lifeExp = getIRAMRDLifeExpectancy(70);
+            return account.getBalance() / lifeExp;
+        }
+        return 0.0;
     }
 
 

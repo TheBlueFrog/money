@@ -26,7 +26,12 @@ public class Main {
             -NogaRothIRA        initial value of Noga's Roth IRAs, default is reality
         */
 
-        simulation = new Simulation(args);
-        simulation.run ();
+        try {
+            simulation = new Simulation(args);
+            simulation.run ();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

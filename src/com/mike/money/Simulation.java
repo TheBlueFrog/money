@@ -1,5 +1,7 @@
 package com.mike.money;
 
+import static com.mike.money.Scenario.*;
+
 /**
  * Created by mike on 12/19/2015.
  */
@@ -15,7 +17,7 @@ public class Simulation {
         return mScenario;
     }
 
-    public Simulation(String[] args) {
+    public Simulation(String[] args) throws Exception {
         for (int i = 0; i < args.length; ++i) {
             String arg = args[i];
             if (arg.equals("-noSSA"))
@@ -27,7 +29,7 @@ public class Simulation {
         mScenario = new Scenario(args);
     }
 
-    public void run() {
+    public void run() throws Exception {
         print();
 
         print(String.format("%4s %10s %10s %10s %10s %10s %10s %10s %10s",
@@ -36,8 +38,8 @@ public class Simulation {
         for (int year = mScenario.mStartYear; year < mScenario.mEndYear; ++year) {
             double investmentGain = mScenario.getInvestmentGain();
 
-            double mikeIncome = getWorkIncome(year, "mike") + getIRAIncome(year, "mike");
-            double nogaIncome = getWorkIncome (year, "noga") + getIRAIncome(year, "noga");
+            double mikeIncome = getWorkIncome(year, "mike") + getIRAIncome(year, People.Mike);
+            double nogaIncome = getWorkIncome(year, "noga") + getIRAIncome(year, People.Noga);
 
             double ssaIncome = getSSAIncome(year, "mike") + getSSAIncome(year, "noga");
 
@@ -48,7 +50,7 @@ public class Simulation {
             double gainLoss = netIncome - expenses;
 
             print(String.format("%4d %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f",
-                    year, mScenario.getInvestments(), investmentGain, ssaIncome, mikeIncome, nogaIncome, netIncome, expenses, gainLoss));
+                    year, mScenario.getAssets(), investmentGain, ssaIncome, mikeIncome, nogaIncome, netIncome, expenses, gainLoss));
 
             mScenario.update(gainLoss);
         }
@@ -59,7 +61,6 @@ public class Simulation {
      * @TODO other taxes, state,
      * @param investmentGain
      * @param ssaIncome
-     * @param income
      * @return
      */
     private double getNetIncome(double investmentGain, double ssaIncome, double mikeIncome, double nogaIncome) {
@@ -110,18 +111,8 @@ public class Simulation {
      * @param who
      * @return minimum distribution income from IRA
      */
-    private double getIRAIncome(int year, String who) {
-        double income = 0.0;
-
-        if (who.equals("mike")) {
-            income += mScenario.takeMRD(year, who);
-        }
-        else
-        if (who.equals("noga")) {
-            income += mScenario.takeMRD(year, who);
-        }
-
-        return income;
+    private double getIRAIncome(int year, People who) throws Exception {
+        return mScenario.takeMRD(year, who);
     }
 
     private double getSSAIncome(int year, String who) {
