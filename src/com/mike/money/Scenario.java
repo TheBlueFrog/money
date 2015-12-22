@@ -123,9 +123,9 @@ public class Scenario {
                 }
             }
 
-            if (xfer > 0) {
-                Main.simulation.print("Gone broke!");
-            }
+//            if (xfer > 0) {
+//                Main.simulation.print("Gone broke!");
+//            }
         }
     }
 
@@ -168,8 +168,11 @@ public class Scenario {
             mTraditionalIRAValueMike -= mrd;
         }
         if (who.equals("noga")) {
-            mrd = MRDTable.getMRD (age, mTraditionalIRAValueNoga);
-            mTraditionalIRAValueNoga -= mrd;
+            // patch around incomplete support for inherited IRAs
+            if (age > 70) {
+                mrd = MRDTable.getMRD(age, mTraditionalIRAValueNoga);
+                mTraditionalIRAValueNoga -= mrd;
+            }
         }
         return mrd;
     }

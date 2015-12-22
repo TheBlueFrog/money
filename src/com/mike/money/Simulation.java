@@ -30,24 +30,25 @@ public class Simulation {
     public void run() {
         print();
 
-        print(String.format("%4s %10s %10s %10s %10s %10s %10s %10s",
-                "Year", "Inv", "Inv Inc", "SSA Inc", "Gross Inc", "Net Inc", "Expenses", "Net"));
+        print(String.format("%4s %10s %10s %10s %10s %10s %10s %10s %10s",
+                "Year", "Inv", "Inv Inc", "SSA Inc", "Mike Inc", "Noga Inc", "Net Inc", "Expenses", "Net"));
 
         for (int year = mScenario.mStartYear; year < mScenario.mEndYear; ++year) {
             double investmentGain = mScenario.getInvestmentGain();
 
-            double grossIncome = getIncome (year, "mike") + getIncome(year, "noga");
+            double mikeIncome = getWorkIncome(year, "mike") + getIRAIncome(year, "mike");
+            double nogaIncome = getWorkIncome (year, "noga") + getIRAIncome(year, "noga");
 
             double ssaIncome = getSSAIncome(year, "mike") + getSSAIncome(year, "noga");
 
-            double netIncome = getNetIncome (investmentGain, ssaIncome, grossIncome);
+            double netIncome = getNetIncome (investmentGain, ssaIncome, mikeIncome, nogaIncome);
 
             double expenses = mScenario.getExpenses(year);
 
             double gainLoss = netIncome - expenses;
 
-            print(String.format("%4d %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f",
-                    year, mScenario.getInvestments(), investmentGain, ssaIncome, grossIncome, netIncome, expenses, gainLoss));
+            print(String.format("%4d %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f",
+                    year, mScenario.getInvestments(), investmentGain, ssaIncome, mikeIncome, nogaIncome, netIncome, expenses, gainLoss));
 
             mScenario.update(gainLoss);
         }
@@ -61,7 +62,7 @@ public class Simulation {
      * @param income
      * @return
      */
-    private double getNetIncome(double investmentGain, double ssaIncome, double income) {
+    private double getNetIncome(double investmentGain, double ssaIncome, double mikeIncome, double nogaIncome) {
         /*
         as of 2015, married filing jointly
 
@@ -72,7 +73,7 @@ public class Simulation {
         28%	        $151,200 - $230,450
         */
 
-        double i = investmentGain + ssaIncome + income;
+        double i = investmentGain + ssaIncome + mikeIncome + nogaIncome;
         double tax = 0;
         if (i < 18450)
             tax = 0.10;
@@ -87,31 +88,40 @@ public class Simulation {
     }
 
     /**
-     * income includes work and IRA MRDs
      * @param year
      * @param who
-     * @return
+     * @return work income
      */
-    private double getIncome(int year, String who) {
-        if (mNoIncome)
-            return 0.0;
+    private double getWorkIncome(int year, String who) {
+        double income = 0.0;
+
+        if ( ! mNoIncome) {
+            if (who.equals("noga")) {
+                if (year <= 2019)
+                    income += 110000.00;
+            }
+        }
+
+        return income;
+    }
+
+    /**
+     * @param year
+     * @param who
+     * @return minimum distribution income from IRA
+     */
+    private double getIRAIncome(int year, String who) {
+        double income = 0.0;
 
         if (who.equals("mike")) {
-            double mrd = mScenario.takeMRD(year, who);
-            return mrd;
+            income += mScenario.takeMRD(year, who);
         }
         else
         if (who.equals("noga")) {
-            if (year <= 2019)
-                return 110000.00;
-            if (year <= 2027)
-                return 0;
-
-            double mrd = mScenario.takeMRD(year, who);
-            return mrd;
+            income += mScenario.takeMRD(year, who);
         }
 
-        return 0.0;
+        return income;
     }
 
     private double getSSAIncome(int year, String who) {

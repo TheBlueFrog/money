@@ -18,11 +18,11 @@ public class Expenses {
         expensesForYear.put(y++, BasicBurnRate + TuitionPerYear);     // kids plus Tal in school sophmore
         expensesForYear.put(y++, BasicBurnRate + TuitionPerYear);     // kids plus Tal in school junior
         expensesForYear.put(y++, BasicBurnRate + TuitionPerYear);     // kids plus Tal in school senior
-        expensesForYear.put(y++, (8000 * 12) + (TuitionPerYear * 2));     // no kids guys in school freshmen + Tal help
-        expensesForYear.put(y++, (8000 * 12) + (TuitionPerYear * 2));     // no kids guys in school soph
+        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2));     // no kids guys in school freshmen + Tal help
+        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2));     // no kids guys in school soph
         // 2020
-        expensesForYear.put(y++, (8000 * 12) + (TuitionPerYear * 2));     // no kids guys in school junior
-        expensesForYear.put(y++, (8000 * 12) + (TuitionPerYear * 2));     // no kids guys in school senior
+        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2));     // no kids guys in school junior
+        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2));     // no kids guys in school senior
         expensesForYear.put(y++, BasicBurnRate + 6000.0);     // no kids bit of help
         expensesForYear.put(y++, BasicBurnRate + 6000.0);     // no kids bit of help
         expensesForYear.put(y++, BasicBurnRate + 6000.0);     // no kids bit of help
@@ -52,20 +52,28 @@ public class Expenses {
         expensesForYear.put(y++, BasicBurnRate * 0.5);
         expensesForYear.put(2047, BasicBurnRate * 0.5);
     };
+    private double mConstantExpenses = 0;
 
     public Expenses(String[] args) {
-        for (String s : args) {
-            if (s.equals("-noexpenses")){
+        for (int i = 0; i < args.length; ++i) {
+            String s = args[i];
+            if (s.equals("-noExpenses")){
                 expensesForYear.clear();
+            }
+            if (s.equals("-Expenses")) {
+                expensesForYear.clear();
+                mConstantExpenses = Double.parseDouble(args[++i]);
             }
         }
     }
 
     double getExpenses(int year) {
+        if (mConstantExpenses > 0.0)
+            return mConstantExpenses;
         if (expensesForYear.containsKey(year))
             return expensesForYear.get(year);
-        else
-            return 0.0;
+
+        return 0.0;
     }
 
 }

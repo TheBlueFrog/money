@@ -11,6 +11,8 @@ public class Main {
         /*
             flags etc.
 
+-noSSA -roi 0 -noIncome -Expenses 12000.0 -investment 0 -MikeTraditionalIRA 0 -MikeRothIRA 0 -NogaTraditionalIRA 20000.0
+
             -noexpenses removes expenses for all years, debugging
 
             -startYear yyyy     set start year, default 2015
