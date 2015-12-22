@@ -70,16 +70,10 @@ class MRDTable {
         this.lifeExpectancy = le;
     }
 
-    public static double getIRAMRDLifeExpectancy(int year, String who) {
-        // not sure this applies to both people
-        int age = 0;
-        if (who.equals("mike"))
-            age = year - Simulation.MikeBirthYear;
-        if (who.equals("noga"))
-            age = year - Simulation.NogaBirthYear;
+    public static double getIRAMRDLifeExpectancy(int age) {
 
         if (age < 70) {
-            // @TODO missing MRD for inherited IRAs
+            // @TODO missing MRD support for inherited IRAs
             return -1.0;
         }
 
@@ -91,7 +85,24 @@ class MRDTable {
                 return i.lifeExpectancy;
 
         assert false;
-        return 0;
+        return 0.0;
     }
+
+    static public double getMRD(int age, double value) {
+        if (age >= 70) {
+            double lifeExp = getIRAMRDLifeExpectancy(age);
+            if (lifeExp > 0.0) {
+                double mrd = value / lifeExp;
+                return mrd;
+            }
+        }
+        // too young, inherited IRA MRD
+        // @TODO
+        if (value > 0.0)
+            return 2100 * 4.0;
+        else
+            return 0.0;
+    }
+
 
 }
