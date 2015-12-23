@@ -9,21 +9,30 @@ public class Simulation {
     public static final int MikeBirthYear = 1948;
     static public final int NogaBirthYear = 1957;
 
-    private final Scenario mScenario;
+    private Scenario mScenario;
     private boolean mUseSSA = true;
-    private boolean mNoIncome = false;
+    private double mFixedIncome = 0.0;
 
     public Scenario getScenario () {
         return mScenario;
     }
 
     public Simulation(String[] args) throws Exception {
-        for (int i = 0; i < args.length; ++i) {
-            String arg = args[i];
-            if (arg.equals("-noSSA"))
-                mUseSSA = false;
-            if (arg.equals("-noIncome"))
-                mNoIncome = true;
+        boolean doTest = false;
+        for (String s : args)
+            if (s.contains("-test"))
+                doTest = true;
+
+        if (doTest) {
+            mFixedIncome = 50.0;
+            mUseSSA = false;
+        }
+        else {
+            for (int i = 0; i < args.length; ++i) {
+                String arg = args[i];
+                if (arg.equals("-noSSA"))
+                    mUseSSA = false;
+            }
         }
 
         mScenario = new Scenario(args);
@@ -105,9 +114,9 @@ public class Simulation {
      * @return work income
      */
     private void depositWorkIncome(Account general, int year, People who) throws Exception {
-        double income = 0.0;
+        double income = mFixedIncome;
 
-        if ( ! mNoIncome) {
+        if (mFixedIncome < 1.0) {
             if (who.equals(People.Noga)) {
                 if (year <= 2019)
                     income += 110000.00;

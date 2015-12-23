@@ -38,28 +38,43 @@ public class Scenario {
     // these are in the order they should be drained to cover shortfalls or
     // excesses deposited
 
-    private void init () {
-        mAccounts.put ("Wells Fargo",       new Account(Account.AccountType.General,                People.Joint,  40000.0));
-        mAccounts.put ("College",           new Account(Account.AccountType.General,                People.Joint, 150000.0));
-        mAccounts.put ("eBay stock eTrade", new Account(Account.AccountType.General,                People.Joint,  48000.0));
-        mAccounts.put ("Trading Ameritrade",    new Account(Account.AccountType.General,            People.Joint,  49000.0));
-        mAccounts.put ("Intel stock ?",     new Account(Account.AccountType.General,                People.Joint,      0.0));
+    private void init (String[] args) {
+        boolean doTest = false;
+        for (String s : args)
+            if (s.contains("-test"))
+                doTest = true;
 
-        mAccounts.put ("Schwab",            new Account(Account.AccountType.TraditionalIRA,         People.Mike,  72000.0));
-        mAccounts.put ("IRA 1 Ameritrade",  new Account(Account.AccountType.TraditionalIRA,         People.Mike,    6500.0));
-        mAccounts.put ("IRA 2 Ameritrade",  new Account(Account.AccountType.RothIRA,                People.Mike,   16000.0));
-        mAccounts.put ("Securion",          new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 137000.0));
-        mAccounts.put ("TIAA",              new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike,  68000.0));
-        mAccounts.put ("IRA 3 Ameritrade",  new Account(Account.AccountType.TraditionalIRA,         People.Noga,    6400.0));
-        mAccounts.put ("IRA ?",             new Account(Account.AccountType.TraditionalIRA,         People.Noga,   16000.0));
+        if (doTest) {
+            mAccounts.put("Wells Fargo", new Account(Account.AccountType.General, People.Joint, 1000.0));
+//            mAccounts.put("College", new Account(Account.AccountType.General, People.Joint, 150000.0));
+            mAccounts.put("Trading", new Account(Account.AccountType.Trading, People.Joint, 1000.0));
+//            mAccounts.put("Intel stock ?", new Account(Account.AccountType.General, People.Joint, 0.0));
+        }
+        else {
+            // real scenario
+            mAccounts.put("Wells Fargo", new Account(Account.AccountType.General, People.Joint, 40000.0));
+            mAccounts.put("College", new Account(Account.AccountType.Trading, People.Joint, 150000.0));
+            mAccounts.put("eBay stock eTrade", new Account(Account.AccountType.Trading, People.Joint, 48000.0));
+            mAccounts.put("Trading Ameritrade", new Account(Account.AccountType.Trading, People.Joint, 49000.0));
+            mAccounts.put("Intel stock ?", new Account(Account.AccountType.Trading, People.Joint, 0.0));
+
+            mAccounts.put("Schwab", new Account(Account.AccountType.TraditionalIRA, People.Mike, 72000.0));
+            mAccounts.put("IRA 1 Ameritrade", new Account(Account.AccountType.TraditionalIRA, People.Mike, 6500.0));
+            mAccounts.put("IRA 2 Ameritrade", new Account(Account.AccountType.RothIRA, People.Mike, 16000.0));
+            mAccounts.put("Securion", new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 137000.0));
+            mAccounts.put("TIAA", new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 68000.0));
+            mAccounts.put("IRA 3 Ameritrade", new Account(Account.AccountType.TraditionalIRA, People.Noga, 6400.0));
+            mAccounts.put("IRA ?", new Account(Account.AccountType.TraditionalIRA, People.Noga, 16000.0));
+        }
     }
 
     public Scenario(String[] args) throws Exception {
 
         mExpenses = new Expenses(args);
 
-        init ();
+        init (args);
 
+        // do tweaks
         for (int i = 0; i < args.length; ++i) {
             String arg = args[i];
             if (arg.equals("-general"))

@@ -53,21 +53,31 @@ public class Expenses {
         expensesForYear.put(2047, BasicBurnRate * 0.5);
     };
     private double mConstantExpenses = 0;
+    private boolean doTest = false;
 
     public Expenses(String[] args) {
-        for (int i = 0; i < args.length; ++i) {
-            String s = args[i];
-            if (s.equals("-noExpenses")){
-                expensesForYear.clear();
-            }
-            if (s.equals("-Expenses")) {
-                expensesForYear.clear();
-                mConstantExpenses = Double.parseDouble(args[++i]);
+        for (String s : args)
+            if (s.contains("-test"))
+                doTest = true;
+
+        if (doTest) {
+          mConstantExpenses = 100.0;
+        } else {
+            for (int i = 0; i < args.length; ++i) {
+                String s = args[i];
+                if (s.equals("-noExpenses")) {
+                    expensesForYear.clear();
+                }
+                if (s.equals("-Expenses")) {
+                    expensesForYear.clear();
+                    mConstantExpenses = Double.parseDouble(args[++i]);
+                }
             }
         }
     }
 
     double getExpenses(int year) {
+
         if (mConstantExpenses > 0.0)
             return mConstantExpenses;
         if (expensesForYear.containsKey(year))

@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c9a15c13-c0e8-4902-b1dc-00c18dd9438b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Account.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Account.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Main.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/SSA.java" afterPath="$PROJECT_DIR$/src/com/mike/money/SSA.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Expenses.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Expenses.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Scenario.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Scenario.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Simulation.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Simulation.java" />
     </list>
@@ -45,12 +44,12 @@
         <entry file="file://$PROJECT_DIR$/src/com/mike/money/Simulation.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="57" column="13" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
+              <caret line="46" column="66" selection-start-line="46" selection-start-column="66" selection-end-line="46" selection-end-column="66" />
               <folding>
-                <element signature="e#3961#3962#0" expanded="true" />
-                <element signature="e#3998#3999#0" expanded="true" />
-                <element signature="e#4025#4026#0" expanded="true" />
-                <element signature="e#4058#4059#0" expanded="true" />
+                <element signature="e#4165#4166#0" expanded="true" />
+                <element signature="e#4202#4203#0" expanded="true" />
+                <element signature="e#4229#4230#0" expanded="true" />
+                <element signature="e#4262#4263#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -70,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/mike/money/Expenses.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+              <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,37 +77,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Scenario.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Scenario.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mike/money/Scenario.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52873564">
-              <caret line="144" column="30" selection-start-line="144" selection-start-column="30" selection-end-line="144" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="55" column="76" selection-start-line="55" selection-start-column="76" selection-end-line="55" selection-end-column="76" />
               <folding>
                 <element signature="e#890#907#0" expanded="true" />
-                <element signature="e#4347#4348#0" expanded="true" />
-                <element signature="e#4398#4399#0" expanded="true" />
-                <element signature="e#5559#5580#0" expanded="true" />
+                <element signature="e#4850#4851#0" expanded="true" />
+                <element signature="e#4901#4902#0" expanded="true" />
+                <element signature="e#6062#6083#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Account.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Account.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/mike/money/Account.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.65163475">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding>
-                <element signature="e#606#607#0" expanded="true" />
-                <element signature="e#632#633#0" expanded="true" />
-                <element signature="e#665#666#0" expanded="true" />
-                <element signature="e#696#697#0" expanded="true" />
-                <element signature="e#732#733#0" expanded="true" />
-                <element signature="e#760#761#0" expanded="true" />
-                <element signature="e#800#801#0" expanded="true" />
-                <element signature="e#829#830#0" expanded="true" />
-                <element signature="e#1584#1585#0" expanded="true" />
-                <element signature="e#1617#1618#0" expanded="true" />
+                <element signature="e#615#616#0" expanded="true" />
+                <element signature="e#641#642#0" expanded="true" />
+                <element signature="e#674#675#0" expanded="true" />
+                <element signature="e#705#706#0" expanded="true" />
+                <element signature="e#741#742#0" expanded="true" />
+                <element signature="e#769#770#0" expanded="true" />
+                <element signature="e#809#810#0" expanded="true" />
+                <element signature="e#838#839#0" expanded="true" />
+                <element signature="e#1593#1594#0" expanded="true" />
+                <element signature="e#1626#1627#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -161,12 +160,12 @@
         <option value="$PROJECT_DIR$/src/com/mike/money/MRDAge.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/State.java" />
         <option value="$PROJECT_DIR$/cmd" />
-        <option value="$PROJECT_DIR$/src/com/mike/money/Expenses.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/MRDTable.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/SSA.java" />
-        <option value="$PROJECT_DIR$/src/com/mike/money/Account.java" />
-        <option value="$PROJECT_DIR$/src/com/mike/money/Simulation.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/mike/money/Expenses.java" />
+        <option value="$PROJECT_DIR$/src/com/mike/money/Simulation.java" />
+        <option value="$PROJECT_DIR$/src/com/mike/money/Account.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/Scenario.java" />
       </list>
     </option>
@@ -629,7 +628,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="com.mike.money.Main" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value=" -noIncome -roi 0  -Expenses 12000.0 -general 0  -noIRA" />
+      <option name="PROGRAM_PARAMETERS" value=" -test " />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -680,7 +679,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.49398908" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31912568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -729,21 +728,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/mike/money/Scenario.java</url>
-          <line>205</line>
+          <line>220</line>
           <properties />
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/mike/money/Scenario.java</url>
-          <line>142</line>
+          <line>157</line>
           <properties />
           <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/mike/money/Simulation.java</url>
+          <line>47</line>
+          <properties />
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="49" />
+      <option name="time" value="50" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -765,10 +770,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3961#3962#0" expanded="true" />
-            <element signature="e#3998#3999#0" expanded="true" />
-            <element signature="e#4025#4026#0" expanded="true" />
-            <element signature="e#4058#4059#0" expanded="true" />
+            <element signature="e#4165#4166#0" expanded="true" />
+            <element signature="e#4202#4203#0" expanded="true" />
+            <element signature="e#4229#4230#0" expanded="true" />
+            <element signature="e#4262#4263#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -797,9 +802,9 @@
           <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding>
             <element signature="e#890#907#0" expanded="true" />
-            <element signature="e#4347#4348#0" expanded="true" />
-            <element signature="e#4398#4399#0" expanded="true" />
-            <element signature="e#5559#5580#0" expanded="true" />
+            <element signature="e#4850#4851#0" expanded="true" />
+            <element signature="e#4901#4902#0" expanded="true" />
+            <element signature="e#6062#6083#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -833,10 +838,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3961#3962#0" expanded="true" />
-            <element signature="e#3998#3999#0" expanded="true" />
-            <element signature="e#4025#4026#0" expanded="true" />
-            <element signature="e#4058#4059#0" expanded="true" />
+            <element signature="e#4165#4166#0" expanded="true" />
+            <element signature="e#4202#4203#0" expanded="true" />
+            <element signature="e#4229#4230#0" expanded="true" />
+            <element signature="e#4262#4263#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -862,10 +867,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3961#3962#0" expanded="true" />
-            <element signature="e#3998#3999#0" expanded="true" />
-            <element signature="e#4025#4026#0" expanded="true" />
-            <element signature="e#4058#4059#0" expanded="true" />
+            <element signature="e#4165#4166#0" expanded="true" />
+            <element signature="e#4202#4203#0" expanded="true" />
+            <element signature="e#4229#4230#0" expanded="true" />
+            <element signature="e#4262#4263#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -883,10 +888,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3961#3962#0" expanded="true" />
-            <element signature="e#3998#3999#0" expanded="true" />
-            <element signature="e#4025#4026#0" expanded="true" />
-            <element signature="e#4058#4059#0" expanded="true" />
+            <element signature="e#4165#4166#0" expanded="true" />
+            <element signature="e#4202#4203#0" expanded="true" />
+            <element signature="e#4229#4230#0" expanded="true" />
+            <element signature="e#4262#4263#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -923,16 +928,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Expenses.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mike/money/MRDTable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -949,25 +944,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Account.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
-          <folding>
-            <element signature="e#606#607#0" expanded="true" />
-            <element signature="e#632#633#0" expanded="true" />
-            <element signature="e#665#666#0" expanded="true" />
-            <element signature="e#696#697#0" expanded="true" />
-            <element signature="e#732#733#0" expanded="true" />
-            <element signature="e#760#761#0" expanded="true" />
-            <element signature="e#800#801#0" expanded="true" />
-            <element signature="e#829#830#0" expanded="true" />
-            <element signature="e#1584#1585#0" expanded="true" />
-            <element signature="e#1617#1618#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mike/money/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -976,28 +952,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Expenses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mike/money/Simulation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="13" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
+          <caret line="46" column="66" selection-start-line="46" selection-start-column="66" selection-end-line="46" selection-end-column="66" />
           <folding>
-            <element signature="e#3961#3962#0" expanded="true" />
-            <element signature="e#3998#3999#0" expanded="true" />
-            <element signature="e#4025#4026#0" expanded="true" />
-            <element signature="e#4058#4059#0" expanded="true" />
+            <element signature="e#4165#4166#0" expanded="true" />
+            <element signature="e#4202#4203#0" expanded="true" />
+            <element signature="e#4229#4230#0" expanded="true" />
+            <element signature="e#4262#4263#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mike/money/Scenario.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52873564">
-          <caret line="144" column="30" selection-start-line="144" selection-start-column="30" selection-end-line="144" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="76" selection-start-line="55" selection-start-column="76" selection-end-line="55" selection-end-column="76" />
           <folding>
             <element signature="e#890#907#0" expanded="true" />
-            <element signature="e#4347#4348#0" expanded="true" />
-            <element signature="e#4398#4399#0" expanded="true" />
-            <element signature="e#5559#5580#0" expanded="true" />
+            <element signature="e#4850#4851#0" expanded="true" />
+            <element signature="e#4901#4902#0" expanded="true" />
+            <element signature="e#6062#6083#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Account.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65163475">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <element signature="e#615#616#0" expanded="true" />
+            <element signature="e#641#642#0" expanded="true" />
+            <element signature="e#674#675#0" expanded="true" />
+            <element signature="e#705#706#0" expanded="true" />
+            <element signature="e#741#742#0" expanded="true" />
+            <element signature="e#769#770#0" expanded="true" />
+            <element signature="e#809#810#0" expanded="true" />
+            <element signature="e#838#839#0" expanded="true" />
+            <element signature="e#1593#1594#0" expanded="true" />
+            <element signature="e#1626#1627#0" expanded="true" />
           </folding>
         </state>
       </provider>

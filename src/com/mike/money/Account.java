@@ -7,7 +7,7 @@ import java.util.UUID;
  */
 public class Account {
 
-    static public enum AccountType { General, InheritedTraditionalIRA, TraditionalIRA, RothIRA };
+    static public enum AccountType { General, Trading, InheritedTraditionalIRA, TraditionalIRA, RothIRA };
 
     private String mID;
 
