@@ -7,6 +7,22 @@ import java.util.*;
  */
 public class Scenario {
 
+    public String showAccountNames() {
+        StringBuilder sb = new StringBuilder();
+        for (String s : mAccounts.keySet()) {
+            sb.append(String.format("%9s", s.length() > 10 ? s.substring(0, 8) : s));
+        }
+        return sb.toString();
+    }
+    public String showAccountBalances() {
+        StringBuilder sb = new StringBuilder();
+        for (String s : mAccounts.keySet()) {
+            Account a = mAccounts.get(s);
+            sb.append(String.format("%9.0f", a.getBalance()));
+        }
+        return sb.toString();
+    }
+
     static public enum People { Mike, Noga, Joint };
 
     public int mStartYear = 2015;
@@ -27,14 +43,15 @@ public class Scenario {
         mAccounts.put ("College",           new Account(Account.AccountType.General,                People.Joint, 150000.0));
         mAccounts.put ("eBay stock eTrade", new Account(Account.AccountType.General,                People.Joint,  48000.0));
         mAccounts.put ("Trading Ameritrade",    new Account(Account.AccountType.General,            People.Joint,  49000.0));
-        mAccounts.put ("Schwab",            new Account(Account.AccountType.TraditionalIRA,         People.Joint,  72000.0));
+        mAccounts.put ("Intel stock ?",     new Account(Account.AccountType.General,                People.Joint,      0.0));
+
+        mAccounts.put ("Schwab",            new Account(Account.AccountType.TraditionalIRA,         People.Mike,  72000.0));
         mAccounts.put ("IRA 1 Ameritrade",  new Account(Account.AccountType.TraditionalIRA,         People.Mike,    6500.0));
         mAccounts.put ("IRA 2 Ameritrade",  new Account(Account.AccountType.RothIRA,                People.Mike,   16000.0));
         mAccounts.put ("Securion",          new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 137000.0));
         mAccounts.put ("TIAA",              new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike,  68000.0));
-        mAccounts.put ("Intel stock ?",     new Account(Account.AccountType.General,                People.Joint,      0.0));
         mAccounts.put ("IRA 3 Ameritrade",  new Account(Account.AccountType.TraditionalIRA,         People.Noga,    6400.0));
-        mAccounts.put ("?",                 new Account(Account.AccountType.TraditionalIRA,         People.Noga,   16000.0));
+        mAccounts.put ("IRA ?",             new Account(Account.AccountType.TraditionalIRA,         People.Noga,   16000.0));
     }
 
     public Scenario(String[] args) throws Exception {
@@ -45,18 +62,32 @@ public class Scenario {
 
         for (int i = 0; i < args.length; ++i) {
             String arg = args[i];
-            if (arg.equals("-investment"))
-                set(Account.AccountType.General, People.Joint, Double.parseDouble(args[++i]));
+            if (arg.equals("-general"))
+                getGeneralAccount().setBalance(Double.parseDouble(args[++i]));
 
-            if (arg.equals("-MikeTraditionalIRA"))
-                set(Account.AccountType.TraditionalIRA, People.Mike, Double.parseDouble(args[++i]));
-            if (arg.equals("-MikeRothIRA"))
-                set(Account.AccountType.RothIRA, People.Mike, Double.parseDouble(args[++i]));
+            if (arg.equals("-noStock")) {
+                mAccounts.get("College").setBalance(0.0);
+                mAccounts.get("Trading Ameritrade").setBalance(0.0);
+                mAccounts.get("eBay stock eTrade").setBalance(0.0);
+                mAccounts.get("Intel stock ?").setBalance(0.0);
+            }
 
-            if (arg.equals("-NogaTraditionalIRA"))
-                set(Account.AccountType.TraditionalIRA, People.Noga, Double.parseDouble(args[++i]));
-            if (arg.equals("-NogaRothIRA"))
-                set(Account.AccountType.RothIRA, People.Noga, Double.parseDouble(args[++i]));
+            if (arg.equals("-noIRA")) {
+                for(String s : mAccounts.keySet()) {
+                    Account a = mAccounts.get(s);
+                    if (   (a.getType() == Account.AccountType.InheritedTraditionalIRA)
+                        || (a.getType() == Account.AccountType.RothIRA)
+                        || (a.getType() == Account.AccountType.TraditionalIRA))
+                        a.setBalance(0.0);
+                }
+            }
+            if (arg.equals("-noInheritedIRA")) {
+                for(String s : mAccounts.keySet()) {
+                    Account a = mAccounts.get(s);
+                    if (   (a.getType() == Account.AccountType.InheritedTraditionalIRA))
+                        a.setBalance(0.0);
+                }
+            }
 
             if (arg.equals("-startYear"))
                 mStartYear = 2015;
@@ -67,53 +98,39 @@ public class Scenario {
         }
     }
 
-    private void set(Account.AccountType type, People owner, double amount) throws Exception {
-        for (String name : mAccounts.keySet()) {
-            Account a = mAccounts.get(name);
-            if (a.matches(type, owner)) {
-                a.setBalance (amount);
-                return;
-            }
-        }
-
-        throw new Exception("Failed to setup account");
+    public Account getGeneralAccount() {
+        return mAccounts.get("Wells Fargo");
     }
 
-    public double getInvestmentGain() {
-        double gain = getAssets() * mInterestIncomeRate;
-        return gain;
-    }
+//    private void set(Account.AccountType type, People owner, double amount) throws Exception {
+//        for (String name : mAccounts.keySet()) {
+//            Account a = mAccounts.get(name);
+//            if (a.matches(type, owner)) {
+//                a.setBalance (amount);
+//                return;
+//            }
+//        }
+//
+//        throw new Exception("Failed to setup account");
+//    }
 
-    /**
-     * given the gain/loss of the expenses vs income update
-     * the investments
-     *
-     * any MRD has already been deducted from the IRA
-     *
-     * any gain simply goes in a general investment fund
-     * any loss is assumed to be coming from the general investment
-     * fund, hence deducted from that.
-     *
-     * @param gainLoss
-     */
-    public void update(double gainLoss) throws Exception {
-        Account general = mAccounts.get("Wells Fargo");
-
-        if (gainLoss > 0.0)
-            general.deposit(gainLoss);
-        else {
-            if (general.getBalance() >= Math.abs(gainLoss)) {
-                general.withdraw(Math.abs(gainLoss));
-            }
-            else {
-                double x = liquidate(general, Math.abs(gainLoss) - general.getBalance());
-                general.deposit(x);
-                general.withdraw(Math.abs(gainLoss));
+    public void depositInvestmentGain() throws Exception {
+        for (String s : mAccounts.keySet()) {
+            Account a = mAccounts.get(s);
+            switch (a.getType()) {
+                case General:
+                    break;
+                case InheritedTraditionalIRA:
+                case RothIRA:
+                case TraditionalIRA:
+                    double d = a.getBalance() * mInterestIncomeRate;
+                    a.deposit(d);
+                    break;
             }
         }
     }
 
-    private double liquidate(Account general, double amount) throws Exception {
+    public double liquidate(Account general, double amount) throws Exception {
         // drain by type, assumes who they belong to doesn't matter
         // @ TODO is this correct?
 
@@ -126,16 +143,16 @@ public class Scenario {
         double withdrawn = 0.0;
 
         for (Account.AccountType t : ordering) {
-            for (String g : mAccounts.keySet()) {
-                if ( ! g.equals(general)) {           // skip Wells
-                    Account a = mAccounts.get(g);
+            for (String s : mAccounts.keySet()) {
+                Account a = mAccounts.get(s);
+                if ( ! a.getID().equals(general.getID())) {           // skip Wells
                     if (a.getType().equals(t)) {
                         double d = Math.min(amount, a.getBalance());
                         if (d > 0.0) {
                             a.withdraw(d);
-
+                            print(String.format("Liquidate %10.0f from %s", d, s));
                             withdrawn += d;
-                            if (withdrawn > amount)
+                            if (withdrawn >= amount)
                                 return withdrawn;
                         }
                     }
@@ -177,21 +194,20 @@ public class Scenario {
         return year - birthYear;
     }
 
-    public double takeMRD(int year, People who) throws Exception {
+    public void takeMRD(Account general, int year, People who) throws Exception {
         int age = getAge(year, who);
-        double mrd = 0.0;
-        Account general = mAccounts.get("Wells Fargo");
 
         for (String g : mAccounts.keySet()) {
             Account a = mAccounts.get(g);
             if (a.getType().equals(Account.AccountType.TraditionalIRA)) {
-                mrd += MRDTable.getMRD (age, a);
+                double mrd = MRDTable.getMRD (age, a);
+
+                if (mrd > a.getBalance())
+                    mrd = a.getBalance();
 
                 a.withdraw(mrd);
                 general.deposit(mrd);
             }
         }
-
-        return mrd;
     }
 }

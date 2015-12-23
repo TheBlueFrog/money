@@ -1,11 +1,15 @@
 package com.mike.money;
 
+import java.util.UUID;
+
 /**
  * Created by mike on 12/22/2015.
  */
 public class Account {
 
     static public enum AccountType { General, InheritedTraditionalIRA, TraditionalIRA, RothIRA };
+
+    private String mID;
 
     private double mBalance;    // current balance in the account
 
@@ -14,11 +18,16 @@ public class Account {
     private Scenario.People mOwner;
 
     public Account(AccountType type, Scenario.People owner, double balance) {
+        mID = UUID.randomUUID().toString();
+
         mBalance = balance;
         mType = type;
         mOwner = owner;
     }
 
+    public String getID () {
+        return mID;
+    }
     public double getBalance() {
         return mBalance;
     }

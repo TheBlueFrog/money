@@ -92,19 +92,22 @@ public class SSA {
 */
 
 
-    public static double getIncome(int year, String who) {
+    public static double getIncome(Account general, int year, Scenario.People who) throws Exception {
         if (year < SSARecs[0].year)
             return 0.0;
 
         int i = 0;
         while(SSARecs[i].year != year)
             ++i;
-        if (who.equals("mike"))
-            return SSARecs[i].incomeMike;
-        if (who.equals("noga"))
-            return SSARecs[i].incomeNoga;
 
-        return 0.0;
+        double income = 0.0;
+        if (who.equals(Scenario.People.Mike))
+            income = SSARecs[i].incomeMike;
+        if (who.equals(Scenario.People.Noga))
+            income = SSARecs[i].incomeNoga;
+
+        general.deposit(income);
+        return income;
     }
 
 

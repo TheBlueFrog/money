@@ -32,27 +32,38 @@ public class Simulation {
     public void run() throws Exception {
         print();
 
-        print(String.format("%4s %10s %10s %10s %10s %10s %10s %10s %10s",
-                "Year", "Inv", "Inv Inc", "SSA Inc", "Mike Inc", "Noga Inc", "Net Inc", "Expenses", "Net"));
+        print(String.format("%4s %10s %10s %s",
+                "Year", "Expenses", "Assets", mScenario.showAccountNames()));
 
         for (int year = mScenario.mStartYear; year < mScenario.mEndYear; ++year) {
-            double investmentGain = mScenario.getInvestmentGain();
+            Account general = mScenario.getGeneralAccount();
 
-            double mikeIncome = getWorkIncome(year, "mike") + getIRAIncome(year, People.Mike);
-            double nogaIncome = getWorkIncome(year, "noga") + getIRAIncome(year, People.Noga);
+            mScenario.depositInvestmentGain();
 
-            double ssaIncome = getSSAIncome(year, "mike") + getSSAIncome(year, "noga");
+            depositWorkIncome(general, year, People.Mike);
+            depositIRAIncome(general, year, People.Mike);
 
-            double netIncome = getNetIncome (investmentGain, ssaIncome, mikeIncome, nogaIncome);
+            depositWorkIncome(general, year, People.Noga);
+            depositIRAIncome(general, year, People.Noga);
+
+            depositSSAIncome(general, year, People.Mike);
+            depositSSAIncome(general, year, People.Noga);
+
+// taxes...            double netIncome = getNetIncome (investmentGain, ssaIncome, mikeIncome, nogaIncome);
 
             double expenses = mScenario.getExpenses(year);
 
-            double gainLoss = netIncome - expenses;
+            if (general.getBalance() >= expenses) {
+                general.withdraw(expenses);
+            }
+            else {
+                double x = mScenario.liquidate(general, expenses - general.getBalance());
+                general.deposit(x);
+            }
 
-            print(String.format("%4d %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f",
-                    year, mScenario.getAssets(), investmentGain, ssaIncome, mikeIncome, nogaIncome, netIncome, expenses, gainLoss));
-
-            mScenario.update(gainLoss);
+            String s = mScenario.showAccountBalances();
+            print(String.format("%4d %10.0f %10.0f %s", //%10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f",
+                    year, expenses, mScenario.getAssets(), s));//, investmentGain, ssaIncome, mikeIncome, nogaIncome, netIncome, expenses, gainLoss));
         }
     }
 
@@ -93,17 +104,17 @@ public class Simulation {
      * @param who
      * @return work income
      */
-    private double getWorkIncome(int year, String who) {
+    private void depositWorkIncome(Account general, int year, People who) throws Exception {
         double income = 0.0;
 
         if ( ! mNoIncome) {
-            if (who.equals("noga")) {
+            if (who.equals(People.Noga)) {
                 if (year <= 2019)
                     income += 110000.00;
             }
         }
 
-        return income;
+        general.deposit(income);
     }
 
     /**
@@ -111,15 +122,13 @@ public class Simulation {
      * @param who
      * @return minimum distribution income from IRA
      */
-    private double getIRAIncome(int year, People who) throws Exception {
-        return mScenario.takeMRD(year, who);
+    private void depositIRAIncome(Account general, int year, People who) throws Exception {
+        mScenario.takeMRD(general, year, who);
     }
 
-    private double getSSAIncome(int year, String who) {
+    private void depositSSAIncome(Account general, int year, People who) throws Exception {
         if (mUseSSA)
-            return SSA.getIncome(year, who);
-        else
-            return 0.0;
+            SSA.getIncome(general, year, who);
     }
 
     public void print(String s) {

@@ -11,7 +11,7 @@ public class Main {
         /*
             flags etc.
 
--noSSA -roi 0 -noIncome -Expenses 12000.0 -investment 0 -MikeTraditionalIRA 0 -MikeRothIRA 0 -NogaTraditionalIRA 20000.0
+-noSSA -roi 0 -noIncome -Expenses 12000.0 -general 0 -noStock -noIRA
 
             -noexpenses removes expenses for all years, debugging
 
@@ -19,11 +19,11 @@ public class Main {
             -endYear yyyy       set end year, default 2047
             -roi fff            set annual rate of return on investments, default is 1%, 0.01
 
-            -investment ddd     initial value of investments, default is reality
-            -MikeTraditionalIRA initial value of Mike's traditional IRAs, default is reality
-            -MikeRothIRA        initial value of Mike's Roth IRAs, default is reality
-            -NogaTraditionalIRA initial value of Noga's traditional IRAs, default is reality
-            -NogaRothIRA        initial value of Noga's Roth IRAs, default is reality
+            -general ddd        set general account to ddd
+
+            -noStock            zero all trading/stock accounts
+            -noIRA              zero all IRAs including inherited
+            -noInheritedIRA     zero inherited IRA account
         */
 
         try {
