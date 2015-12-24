@@ -41,11 +41,13 @@ public class Simulation {
     public void run() throws Exception {
         print();
 
-        print(String.format("%4s %10s %10s %s",
-                "Year", "Expenses", "Assets", mScenario.showAccountNames()));
+        print(String.format("%4s %10s %10s %10s %s",
+                "Year", "Expenses", "Tax Paid", "Assets", mScenario.showAccountNames()));
 
         for (int year = mScenario.mStartYear; year < mScenario.mEndYear; ++year) {
             Account general = mScenario.getGeneralAccount();
+
+            double startOfYearBalance = general.getBalance();
 
             mScenario.depositInvestmentGain();
 
@@ -58,9 +60,13 @@ public class Simulation {
             depositSSAIncome(general, year, People.Mike);
             depositSSAIncome(general, year, People.Noga);
 
-// taxes...            double netIncome = getNetIncome (investmentGain, ssaIncome, mikeIncome, nogaIncome);
+            double taxableIncome = general.getBalance() - startOfYearBalance;
+            double tax = getTax(taxableIncome);
+            double taxPaid = taxableIncome * tax;
 
-            double expenses = mScenario.getExpenses(year);
+            double expenses = mScenario.getExpenses(year) + taxPaid;
+
+            general.withdraw(taxPaid);
 
             if (general.getBalance() >= expenses) {
                 general.withdraw(expenses);
@@ -70,20 +76,14 @@ public class Simulation {
                 general.deposit(x);
             }
 
+
             String s = mScenario.showAccountBalances();
-            print(String.format("%4d %10.0f %10.0f %s", //%10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f",
-                    year, expenses, mScenario.getAssets(), s));//, investmentGain, ssaIncome, mikeIncome, nogaIncome, netIncome, expenses, gainLoss));
+            print(String.format("%4d %10.0f %10.0f %10.0f %s", //%10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f",
+                    year, expenses, taxPaid, mScenario.getAssets(), s));//, investmentGain, ssaIncome, mikeIncome, nogaIncome, netIncome, expenses, gainLoss));
         }
     }
 
-    /**
-     * mostly compute something like taxes
-     * @TODO other taxes, state,
-     * @param investmentGain
-     * @param ssaIncome
-     * @return
-     */
-    private double getNetIncome(double investmentGain, double ssaIncome, double mikeIncome, double nogaIncome) {
+    private double getTax(double taxableIncome) {
         /*
         as of 2015, married filing jointly
 
@@ -94,18 +94,17 @@ public class Simulation {
         28%	        $151,200 - $230,450
         */
 
-        double i = investmentGain + ssaIncome + mikeIncome + nogaIncome;
         double tax = 0;
-        if (i < 18450)
+        if (taxableIncome < 18450)
             tax = 0.10;
-        if (i < 74900)
+        if (taxableIncome < 74900)
             tax = 0.15;
-        if (i < 151200)
+        if (taxableIncome < 151200)
             tax = 0.25;
         else
             tax = 0.28;
 
-        return i - (i * tax);
+        return tax;
     }
 
     /**

@@ -61,7 +61,7 @@ public class Expenses {
                 doTest = true;
 
         if (doTest) {
-          mConstantExpenses = 100.0;
+          mConstantExpenses = 1000.0;
         } else {
             for (int i = 0; i < args.length; ++i) {
                 String s = args[i];

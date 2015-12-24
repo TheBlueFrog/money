@@ -26,7 +26,7 @@ public class Scenario {
     static public enum People { Mike, Noga, Joint };
 
     public int mStartYear = 2015;
-    public int mEndYear = 2047;
+    public int mEndYear = 2057;
     public double mInterestIncomeRate = 0.010;
 
     private Map<String, Account> mAccounts = new HashMap<String, Account>();
@@ -52,19 +52,19 @@ public class Scenario {
         }
         else {
             // real scenario
-            mAccounts.put("Wells Fargo", new Account(Account.AccountType.General, People.Joint, 40000.0));
-            mAccounts.put("College", new Account(Account.AccountType.Trading, People.Joint, 150000.0));
-            mAccounts.put("eBay stock eTrade", new Account(Account.AccountType.Trading, People.Joint, 48000.0));
-            mAccounts.put("Trading Ameritrade", new Account(Account.AccountType.Trading, People.Joint, 49000.0));
-            mAccounts.put("Intel stock ?", new Account(Account.AccountType.Trading, People.Joint, 0.0));
+            mAccounts.put("Wells Fargo",        new Account(Account.AccountType.General,        People.Joint, 40000.0));
+            mAccounts.put("College",            new Account(Account.AccountType.Trading,        People.Joint, 150000.0));
+            mAccounts.put("eBay stock eTrade",  new Account(Account.AccountType.Trading,        People.Joint, 48000.0));
+            mAccounts.put("Trading Ameritrade", new Account(Account.AccountType.Trading,        People.Joint, 49000.0));
+            mAccounts.put("Intel stock ?",      new Account(Account.AccountType.Trading,        People.Joint, 0.0));
 
-            mAccounts.put("Schwab", new Account(Account.AccountType.TraditionalIRA, People.Mike, 72000.0));
-            mAccounts.put("IRA 1 Ameritrade", new Account(Account.AccountType.TraditionalIRA, People.Mike, 6500.0));
-            mAccounts.put("IRA 2 Ameritrade", new Account(Account.AccountType.RothIRA, People.Mike, 16000.0));
-            mAccounts.put("Securion", new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 137000.0));
-            mAccounts.put("TIAA", new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 68000.0));
-            mAccounts.put("IRA 3 Ameritrade", new Account(Account.AccountType.TraditionalIRA, People.Noga, 6400.0));
-            mAccounts.put("IRA ?", new Account(Account.AccountType.TraditionalIRA, People.Noga, 16000.0));
+            mAccounts.put("Schwab",             new Account(Account.AccountType.TraditionalIRA, People.Mike, 72000.0));
+            mAccounts.put("IRA 1 Ameritrade",   new Account(Account.AccountType.TraditionalIRA, People.Mike, 6500.0));
+            mAccounts.put("IRA 2 Ameritrade",   new Account(Account.AccountType.RothIRA,        People.Mike, 16000.0));
+            mAccounts.put("Securion",           new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 137000.0));
+            mAccounts.put("TIAA",               new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 68000.0));
+            mAccounts.put("IRA 3 Ameritrade",   new Account(Account.AccountType.TraditionalIRA, People.Noga, 6400.0));
+            mAccounts.put("IRA ?",              new Account(Account.AccountType.TraditionalIRA, People.Noga, 16000.0));
         }
     }
 
@@ -135,12 +135,16 @@ public class Scenario {
             switch (a.getType()) {
                 case General:
                     break;
+                case Trading:
                 case InheritedTraditionalIRA:
                 case RothIRA:
                 case TraditionalIRA:
                     double d = a.getBalance() * mInterestIncomeRate;
                     a.deposit(d);
                     break;
+
+                default:
+                    print("Missing case statement " + a.getType().toString());
             }
         }
     }
@@ -151,6 +155,7 @@ public class Scenario {
 
         List<Account.AccountType> ordering = new ArrayList<Account.AccountType>();
         ordering.add(Account.AccountType.General);
+        ordering.add(Account.AccountType.Trading);
         ordering.add(Account.AccountType.InheritedTraditionalIRA);
         ordering.add(Account.AccountType.RothIRA);
         ordering.add(Account.AccountType.TraditionalIRA);
@@ -175,7 +180,7 @@ public class Scenario {
             }
         }
 
-        Main.simulation.print("Gone broke!");
+        Main.simulation.print(String.format("Gone broke!, short %9.0f", amount));
         return withdrawn;
     }
 
@@ -214,15 +219,7 @@ public class Scenario {
 
         for (String g : mAccounts.keySet()) {
             Account a = mAccounts.get(g);
-            if (a.getType().equals(Account.AccountType.TraditionalIRA)) {
-                double mrd = MRDTable.getMRD (age, a);
-
-                if (mrd > a.getBalance())
-                    mrd = a.getBalance();
-
-                a.withdraw(mrd);
-                general.deposit(mrd);
-            }
+            a.takeMRD(general, age);
         }
     }
 }

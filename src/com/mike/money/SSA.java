@@ -96,11 +96,18 @@ public class SSA {
         if (year < SSARecs[0].year)
             return 0.0;
 
-        int i = 0;
-        while(SSARecs[i].year != year)
-            ++i;
-
         double income = 0.0;
+
+        int i = 0;
+        if (year > 2047) {
+            // extend last row of table
+            i = SSARecs.length - 1;
+        }
+        else {
+            while(SSARecs[i].year != year)
+                ++i;
+        }
+
         if (who.equals(Scenario.People.Mike))
             income = SSARecs[i].incomeMike;
         if (who.equals(Scenario.People.Noga))

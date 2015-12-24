@@ -7,6 +7,19 @@ import java.util.UUID;
  */
 public class Account {
 
+    public void takeMRD(Account general, int age) throws Exception {
+        if (   getType().equals(Account.AccountType.TraditionalIRA)
+            || getType().equals(AccountType.InheritedTraditionalIRA)) {
+            double mrd = MRDTable.getMRD (age, this);
+
+            if (mrd > getBalance())
+                mrd = getBalance();
+
+            withdraw(mrd);
+            general.deposit(mrd);
+        }
+    }
+
     static public enum AccountType { General, Trading, InheritedTraditionalIRA, TraditionalIRA, RothIRA };
 
     private String mID;
