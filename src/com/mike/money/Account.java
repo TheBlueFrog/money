@@ -7,22 +7,24 @@ import java.util.UUID;
  */
 public class Account {
 
-    public void takeMRD(Account general, int age) throws Exception {
+    public void depositMRD(Account general, int age) throws Exception {
         if (   getType().equals(Account.AccountType.TraditionalIRA)
             || getType().equals(AccountType.InheritedTraditionalIRA)) {
-            double mrd = MRDTable.getMRD (age, this);
 
-            if (mrd > getBalance())
-                mrd = getBalance();
+                double mrd = MRDTable.getMRD(age, this);
 
-            withdraw(mrd);
-            general.deposit(mrd);
+                if (mrd > getBalance())
+                    mrd = getBalance();
+
+                withdraw(mrd);
+                general.deposit(mrd);
         }
     }
 
     static public enum AccountType { General, Trading, InheritedTraditionalIRA, TraditionalIRA, RothIRA };
 
-    private String mID;
+    private int mID;
+    private static int mNextID = 1;
 
     private double mBalance;    // current balance in the account
 
@@ -31,14 +33,14 @@ public class Account {
     private Scenario.People mOwner;
 
     public Account(AccountType type, Scenario.People owner, double balance) {
-        mID = UUID.randomUUID().toString();
+        mID = mNextID++;
 
         mBalance = balance;
         mType = type;
         mOwner = owner;
     }
 
-    public String getID () {
+    public int getID () {
         return mID;
     }
     public double getBalance() {
