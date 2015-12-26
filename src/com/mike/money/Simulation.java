@@ -53,8 +53,13 @@ public class Simulation {
     public void run() throws Exception {
         print();
 
-        print(String.format("%4s %10s %10s %10s %s",
-                "Year", "Expenses", "Tax Paid", "Assets", mScenario.showAccountNames()));
+        String fieldWidth = "%8s";
+        String format = String.format("%%4s %s%s%s%s%%s", fieldWidth, fieldWidth, fieldWidth, fieldWidth);
+        print(String.format(format,
+                "Year", "Expenses", "Taxes", "Liquid", "Assets",
+                mScenario.showAccountNames()));
+        fieldWidth = "%8.0f";
+        format = String.format("%%4s %s%s%s%s%%s", fieldWidth, fieldWidth, fieldWidth, fieldWidth);
 
         mCurrentYear = mStartYear;
         mStop = false;
@@ -94,17 +99,19 @@ public class Simulation {
                 expenses += d;
             }
 
+            double liquidated = 0.0;
             if (general.getBalance() >= expenses) {
                 general.withdraw(expenses);
             }
             else {
-                double x = mScenario.liquidate(general, expenses - general.getBalance());
-                general.deposit(x);
+                liquidated = mScenario.liquidate(general, expenses - general.getBalance());
+                general.deposit(liquidated);
             }
 
-            String s = mScenario.showAccountBalances();
-            print(String.format("%4d %10.0f %10.0f %10.0f %s", //%10.0f %10.0f %10.0f %10.0f %10.0f %10.0f %10.0f",
-                    mCurrentYear, expenses, taxPaid, mScenario.getAssets(), s));//, investmentGain, ssaIncome, mikeIncome, nogaIncome, netIncome, expenses, gainLoss));
+            print(String.format(format,
+                    mCurrentYear,
+                    expenses, taxPaid, liquidated, mScenario.getAssets(),
+                    mScenario.showAccountBalances()));
 
             mCurrentYear++;
         }

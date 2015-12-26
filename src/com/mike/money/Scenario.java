@@ -11,7 +11,7 @@ public class Scenario {
 
     public double mInterestIncomeRate = 0.010;
 
-    private Map<String, Account> mAccounts = new HashMap<String, Account>();
+    private List<Account> mAccounts = new ArrayList<Account>();
 
     private Expenses mExpenses;
 
@@ -22,33 +22,33 @@ public class Scenario {
 
     private void init (String[] args) {
         if (Simulation.doTest) {
-            mAccounts.put("Bank", new Account(Account.AccountType.General, People.Joint, 1000.0));
-            mAccounts.put("College", new Account(Account.AccountType.General, People.Joint, 2000.0));
-            mAccounts.put("Trading", new Account(Account.AccountType.Trading, People.Joint, 100.0));
-            mAccounts.put("Inh IRA 1", new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 2000.0));
-            mAccounts.put("Inh IRA 2", new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 2000.0));
-            mAccounts.put("Trad IRA1", new Account(Account.AccountType.TraditionalIRA, People.Mike, 2000.0));
-            mAccounts.put("Trad IRA2", new Account(Account.AccountType.TraditionalIRA, People.Mike, 2000.0));
-            mAccounts.put("Roth IRA1", new Account(Account.AccountType.RothIRA, People.Mike, 2000.0));
-            mAccounts.put("Roth IRA2", new Account(Account.AccountType.RothIRA, People.Mike, 2000.0));
+            mAccounts.add(new Account("Bank",       Account.AccountType.General, People.Joint, 1000.0));
+            mAccounts.add(new Account("College",    Account.AccountType.General, People.Joint, 2000.0));
+            mAccounts.add(new Account("Trading",    Account.AccountType.Trading, People.Joint, 100.0));
+            mAccounts.add(new Account("Inh IRA 1",  Account.AccountType.InheritedTraditionalIRA, People.Mike, 2000.0));
+            mAccounts.add(new Account("Inh IRA 2",  Account.AccountType.InheritedTraditionalIRA, People.Mike, 2000.0));
+            mAccounts.add(new Account("Trad IRA1",  Account.AccountType.TraditionalIRA, People.Mike, 2000.0));
+            mAccounts.add(new Account("Trad IRA2",  Account.AccountType.TraditionalIRA, People.Mike, 2000.0));
+            mAccounts.add(new Account("Roth IRA1",  Account.AccountType.RothIRA, People.Mike, 2000.0));
+            mAccounts.add(new Account("Roth IRA2",  Account.AccountType.RothIRA, People.Mike, 2000.0));
 
             mInterestIncomeRate = 0.01;
         }
         else {
             // real scenario
-            mAccounts.put("Wells Fargo",        new Account(Account.AccountType.General,        People.Joint, 40000.0));
-            mAccounts.put("College",            new Account(Account.AccountType.Trading,        People.Joint, 150000.0));
-            mAccounts.put("eBay stock eTrade",  new Account(Account.AccountType.Trading,        People.Joint, 48000.0));
-            mAccounts.put("Trading Ameritrade", new Account(Account.AccountType.Trading,        People.Joint, 49000.0));
-            mAccounts.put("Intel stock ?",      new Account(Account.AccountType.Trading,        People.Joint, 0.0));
+            mAccounts.add(new Account("Wells Fargo",        Account.AccountType.General,        People.Joint, 40000.0));
+            mAccounts.add(new Account("College",            Account.AccountType.Trading,        People.Joint, 150000.0));
+            mAccounts.add(new Account("eBay stock eTrade",  Account.AccountType.Trading,        People.Joint, 48000.0));
+            mAccounts.add(new Account("Trading Ameritrade", Account.AccountType.Trading,        People.Joint, 49000.0));
+            mAccounts.add(new Account("Intel stock ?",      Account.AccountType.Trading,        People.Joint, 0.0));
 
-            mAccounts.put("Schwab",             new Account(Account.AccountType.TraditionalIRA, People.Mike, 72000.0));
-            mAccounts.put("IRA 1 Ameritrade",   new Account(Account.AccountType.TraditionalIRA, People.Mike, 6500.0));
-            mAccounts.put("IRA 2 Ameritrade",   new Account(Account.AccountType.RothIRA,        People.Mike, 16000.0));
-            mAccounts.put("Securion",           new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 137000.0));
-            mAccounts.put("TIAA",               new Account(Account.AccountType.InheritedTraditionalIRA, People.Mike, 68000.0));
-            mAccounts.put("IRA 3 Ameritrade",   new Account(Account.AccountType.TraditionalIRA, People.Noga, 6400.0));
-            mAccounts.put("IRA ?",              new Account(Account.AccountType.TraditionalIRA, People.Noga, 16000.0));
+            mAccounts.add(new Account("Schwab",             Account.AccountType.TraditionalIRA, People.Mike, 72000.0));
+            mAccounts.add(new Account("IRA M Ameritrade",   Account.AccountType.TraditionalIRA, People.Mike, 6500.0));
+            mAccounts.add(new Account("Roth M Ameritrade",   Account.AccountType.RothIRA,        People.Mike, 16000.0));
+            mAccounts.add(new Account("Securion",           Account.AccountType.InheritedTraditionalIRA, People.Mike, 137000.0));
+            mAccounts.add(new Account("TIAA",               Account.AccountType.InheritedTraditionalIRA, People.Mike, 68000.0));
+            mAccounts.add(new Account("IRA N Ameritrade",   Account.AccountType.TraditionalIRA, People.Noga, 6400.0));
+            mAccounts.add(new Account("IRA N",              Account.AccountType.TraditionalIRA, People.Noga, 16000.0));
         }
     }
 
@@ -97,8 +97,16 @@ public class Scenario {
         }
     }
 
-    public Account getGeneralAccount() {
-        return mAccounts.get(Simulation.doTest ? "Bank" : "Wells Fargo");
+    public Account getGeneralAccount() throws Exception {
+        return findAccount (Simulation.doTest ? "Bank" : "Wells Fargo");
+    }
+
+    private Account findAccount(String s) throws Exception {
+        for (Account a : mAccounts)
+            if (s.equals(a.getName()))
+                return a;
+
+        throw new Exception("Unknown account " + s);
     }
 
 //    private void set(Account.AccountType type, People owner, double amount) throws Exception {
@@ -114,8 +122,7 @@ public class Scenario {
 //    }
 
     public void depositInvestmentGain() throws Exception {
-        for (String s : mAccounts.keySet()) {
-            Account a = mAccounts.get(s);
+        for (Account a : mAccounts) {
             switch (a.getType()) {
                 case General:
                     break;
@@ -147,21 +154,19 @@ public class Scenario {
         double withdrawn = 0.0;
 
         for (Account.AccountType t : ordering) {
-            for (String s : mAccounts.keySet()) {
-                Account a = mAccounts.get(s);
+            for (Account a : mAccounts)
                 if ( ! (a.getID() == general.getID())) {           // skip Wells
                     if (a.getType().equals(t)) {
                         double d = Math.min(amount, a.getBalance());
                         if (d > 0.0) {
                             a.withdraw(d);
-                            print(String.format("Liquidate %10.0f from %s", d, s));
+//                            print(String.format("Liquidate %10.0f from %s", d, s));
                             withdrawn += d;
                             if (withdrawn >= amount)
                                 return withdrawn;
                         }
                     }
                 }
-            }
         }
 
         if (Simulation.doTest && (Simulation.getYear() == 2010)) {
@@ -176,8 +181,8 @@ public class Scenario {
 
     public double getAssets() {
         double amount = 0.0;
-        for (String a : mAccounts.keySet()) {
-            amount += mAccounts.get(a).getBalance();
+        for (Account a : mAccounts) {
+            amount += a.getBalance();
         }
         return amount;
     }
@@ -211,25 +216,44 @@ public class Scenario {
     public void depositMRD(Account general, int year, People who) throws Exception {
         int age = getAge(year, who);
 
-        for (String g : mAccounts.keySet()) {
-            Account a = mAccounts.get(g);
+        for (Account a : mAccounts)
             a.depositMRD(general, age);
-        }
     }
 
+    private List<Account> orderAccounts () {
+        // sort into groups by type, then alphabetical
+        Map<Account.AccountType, List<Account>> ac = new LinkedHashMap<Account.AccountType, List<Account>>();
+        ac.put(Account.AccountType.General, new ArrayList<Account>());
+        ac.put(Account.AccountType.Trading, new ArrayList<Account>());
+        ac.put(Account.AccountType.InheritedTraditionalIRA, new ArrayList<Account>());
+        ac.put(Account.AccountType.TraditionalIRA, new ArrayList<Account>());
+        ac.put(Account.AccountType.RothIRA, new ArrayList<Account>());
+
+        for (Account.AccountType type : Account.AccountType.values())
+            for(Account a : mAccounts) {
+                if (a.getType() == type)
+                    ac.get(type).add(a);
+            }
+
+        List<Account> r = new ArrayList<Account>();
+        for (Map.Entry<Account.AccountType, List<Account>> s : ac.entrySet()) {
+            for (Account a : s.getValue())
+                r.add(a);
+        }
+
+        return r;
+    }
     public String showAccountNames() {
         StringBuilder sb = new StringBuilder();
-        Set<String> ss = new TreeSet<String>(mAccounts.keySet()); // sort the set by toString
-        for (String s : ss) {
-            sb.append(String.format("%9s", s.length() > 10 ? s.substring(0, 8) : s));
+        for (Account a : orderAccounts()) {
+            String s = a.getName();
+            sb.append(String.format("%9s", s.length() > 9 ? s.substring(0, 7) : s));
         }
         return sb.toString();
     }
     public String showAccountBalances() {
         StringBuilder sb = new StringBuilder();
-        Set<String> ss = new TreeSet<String>(mAccounts.keySet()); // sort the set by toString
-        for (String s : ss) {
-            Account a = mAccounts.get(s);
+        for (Account a : orderAccounts()) {
             sb.append(String.format("%9.0f", a.getBalance()));
         }
         return sb.toString();
@@ -238,8 +262,7 @@ public class Scenario {
     public double testDrawDown(Account general, Account.AccountType t) throws Exception {
         int yearsToGo = Simulation.mEndYear - Simulation.mCurrentYear;
         double x = 0.0;
-        for (String s : mAccounts.keySet()) {
-            Account a = mAccounts.get(s);
+        for (Account a : mAccounts)
             if (a.getType().equals(t)) {
                 if ( ! (general.getID() == a.getID())) {
                     double d = a.getBalance() / yearsToGo;
@@ -248,7 +271,6 @@ public class Scenario {
                     x += d;
                 }
             }
-        }
 
         return x;
     }

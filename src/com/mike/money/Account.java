@@ -7,6 +7,8 @@ import java.util.UUID;
  */
 public class Account {
 
+    private final String mName;
+
     public void depositMRD(Account general, int age) throws Exception {
         if (   getType().equals(Account.AccountType.TraditionalIRA)
             || getType().equals(AccountType.InheritedTraditionalIRA)) {
@@ -32,9 +34,11 @@ public class Account {
 
     private Scenario.People mOwner;
 
-    public Account(AccountType type, Scenario.People owner, double balance) {
+    public Account(String name, AccountType type, Scenario.People owner, double balance) {
+
         mID = mNextID++;
 
+        mName = name;
         mBalance = balance;
         mType = type;
         mOwner = owner;
@@ -42,6 +46,9 @@ public class Account {
 
     public int getID () {
         return mID;
+    }
+    public String getName () {
+        return mName;
     }
     public double getBalance() {
         return mBalance;
