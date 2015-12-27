@@ -5,42 +5,25 @@ import java.util.UUID;
 /**
  * Created by mike on 12/22/2015.
  */
-public class Account {
+public abstract class Account {
 
     private final String mName;
-
-    public void depositMRD(Account general, int age) throws Exception {
-        if (   getType().equals(Account.AccountType.TraditionalIRA)
-            || getType().equals(AccountType.InheritedTraditionalIRA)) {
-
-                double mrd = MRDTable.getMRD(age, this);
-
-                if (mrd > getBalance())
-                    mrd = getBalance();
-
-                withdraw(mrd);
-                general.deposit(mrd);
-        }
-    }
-
-    static public enum AccountType { General, Trading, InheritedTraditionalIRA, TraditionalIRA, RothIRA };
+    protected final Scenario mScenario;
 
     private int mID;
     private static int mNextID = 1;
 
     private double mBalance;    // current balance in the account
 
-    private AccountType mType;
-
     private Scenario.People mOwner;
 
-    public Account(String name, AccountType type, Scenario.People owner, double balance) {
+    protected Account(Scenario s, String name, Scenario.People owner, double balance) {
 
         mID = mNextID++;
+        mScenario = s;
 
         mName = name;
         mBalance = balance;
-        mType = type;
         mOwner = owner;
     }
 
@@ -53,15 +36,8 @@ public class Account {
     public double getBalance() {
         return mBalance;
     }
-    public AccountType getType () {
-        return mType;
-    }
     public Scenario.People getOwner() {
         return mOwner;
-    }
-
-    public boolean matches(AccountType type, Scenario.People owner) {
-        return mType.equals(type) && mOwner.equals(owner);
     }
 
     public void withdraw (double amount) throws Exception {
@@ -80,12 +56,8 @@ public class Account {
         mBalance += amount;
     }
 
-    /**
-     * should only be used during initialization time...
-     * @param amount
-     */
-    public void setBalance(double amount) {
-        mBalance = amount;
-    }
+    abstract public void depositInvestmentGain() throws Exception;
+
+    abstract public void depositMRD(Account general, int age) throws Exception;
 
 }

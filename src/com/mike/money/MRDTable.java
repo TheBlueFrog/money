@@ -82,23 +82,17 @@ class MRDTable {
         throw new Exception("error in getIRAMRDLifeExpectancy");
     }
 
-    static public double getMRD(int age, Account account) throws Exception {
+    static public double getMRD(int age, TraditionalIRA account) throws Exception {
         if (Simulation.doTest) {
             // take a 1/10 mrd, that's not enough to drain it so
             // we test the liquidation code also
             return account.getBalance() / 10.0;
         }
         else {
-            if (age >= 70) {
-                double lifeExp = getIRAMRDLifeExpectancy(age);
+            double lifeExp = account.getLifeExpectancy(age);
+            if (lifeExp > 0)
                 return account.getBalance() / lifeExp;
-            }
 
-            if (account.getType().equals(Account.AccountType.InheritedTraditionalIRA)) {
-                // @ TODO 70?
-                double lifeExp = getIRAMRDLifeExpectancy(70);
-                return account.getBalance() / lifeExp;
-            }
             return 0.0;
         }
     }
