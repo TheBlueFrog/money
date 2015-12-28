@@ -1,11 +1,17 @@
 package com.mike.money;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.List;
+
 /**
  * Created by mike on 12/21/2015.
  */
 public class SSA {
 
-    static private SSARec[] SSARecs = {
+    static private SSARec[] SSARecs2 = {
 
             new SSARec("2018", "69 yr., 2 mo.", "Own-70", "$6,974", "60 yr., 4 mo.", "", "$6,974"),
             new SSARec("2019", "70 yr., 2 mo.", "", "$41,848", "61 yr., 4 mo.", "Own-62", "$7,192"),//,,"$49,040"
@@ -41,15 +47,15 @@ public class SSA {
             new SSARec("2046", "97 yr., 2 mo.", "", "$41,848", "88 yr., 4 mo.", "", "$38,092"),//,"$79,940"
             new SSARec("2047", "98 yr., 2 mo.", "", "$41,848", "89 yr., 4 mo.", "", "$38,092"),//,"$79,940"
             new SSARec("2048", "99 yr., 2 mo.", "", "$34,874", "90 yr., 4 mo.", "Own-70 > Srvr-70-FRA", "$31,744"),//,"$6,974","$73,592"
-            new SSARec("2049",              "", "",        "", "91 yr., 4 mo.", "", "$41,848"),//,"$41,848"
-            new SSARec("2050",              "", "",        "", "92 yr., 4 mo.", "", "$41,848"),//,"$41,848"
-            new SSARec("2051",              "", "",        "", "93 yr., 4 mo.", "", "$41,848"),//,"$41,848"
-            new SSARec("2052",              "", "",        "", "94 yr., 4 mo.", "", "$41,848"),//,"$41,848"
-            new SSARec("2053",              "", "",        "", "95 yr., 4 mo.", "", "$41,848"),//,"$41,848"
-            new SSARec("2054",              "", "",        "", "96 yr., 4 mo.", "", "$41,848"),//,"$41,848"
-            new SSARec("2055",              "", "",        "", "97 yr., 4 mo.", "", "$41,848"),//,"$41,848"
-            new SSARec("2056",              "", "",        "", "98 yr., 4 mo.", "", "$41,848"),//,"$41,848"
-            new SSARec("2057",              "", "",        "", "99 yr., 4 mo.", "", "$27,899") //,"$27,899"
+            new SSARec("2049", "", "", "", "91 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2050", "", "", "", "92 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2051", "", "", "", "93 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2052", "", "", "", "94 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2053", "", "", "", "95 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2054", "", "", "", "96 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2055", "", "", "", "97 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2056", "", "", "", "98 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2057", "", "", "", "99 yr., 4 mo.", "", "$27,899") //,"$27,899"
     };
 
 
@@ -57,50 +63,61 @@ public class SSA {
        their recommended simulation with COLA set to zero
      */
     static private SSARec[] SSARecs1 = {
-            new SSARec ("2018", "69 yr., 2 mo.", "Own-70",  "$6,974", "60 yr., 4 mo.", "",       "$6,974"),
-            new SSARec ("2019", "70 yr., 2 mo.",       "", "$41,848", "61 yr., 4 mo.", "Own-62", "$7,192"),//,,"$49,040"
-            new SSARec ("2020", "71 yr., 2 mo.",       "", "$41,848", "62 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2021", "72 yr., 2 mo.",       "", "$41,848", "63 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2022", "73 yr., 2 mo.",       "", "$41,848", "64 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2023", "74 yr., 2 mo.",       "", "$41,848", "65 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2024", "75 yr., 2 mo.",       "", "$41,848", "66 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2025", "76 yr., 2 mo.",       "", "$41,848", "67 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2026", "77 yr., 2 mo.",       "", "$41,848", "68 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2027", "78 yr., 2 mo.",       "", "$41,848", "69 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2028", "79 yr., 2 mo.",       "", "$41,848", "70 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2029", "80 yr., 2 mo.",       "", "$41,848", "71 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2030", "81 yr., 2 mo.",       "", "$41,848", "72 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2031", "82 yr., 2 mo.",       "", "$41,848", "73 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2032", "83 yr., 2 mo.",       "", "$41,848", "74 yr., 4 mo.",       "", "$21,576"),//,,"$63,424"
-            new SSARec ("2033", "84 yr., 2 mo.",       "", "$34,874", "75 yr., 4 mo.", "+ Srvr-70-FRA", "$17,980"),//, "$6,974"),//,"$59,828"
-            new SSARec ("2034",              "",       "",        "", "76 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2035",              "",       "",        "", "77 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2036",              "",       "",        "", "78 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2037",              "",       "",        "", "79 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2038",              "",       "",        "", "80 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2039",              "",       "",        "", "81 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2040",              "",       "",        "", "82 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2041",              "",       "",        "", "83 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2042",              "",       "",        "", "84 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2043",              "",       "",        "", "85 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2044",              "",       "",        "", "86 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2045",              "",       "",        "", "87 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2046",              "",       "",        "", "88 yr., 4 mo.",       "", "$41,848"),//,"$41,848"
-            new SSARec ("2047",              "",       "",        "", "89 yr., 4 mo.",       "", "$27,899"),//,"$27,899"
+            new SSARec("2018", "69 yr., 2 mo.", "Own-70", "$6,974", "60 yr., 4 mo.", "", "$6,974"),
+            new SSARec("2019", "70 yr., 2 mo.", "", "$41,848", "61 yr., 4 mo.", "Own-62", "$7,192"),//,,"$49,040"
+            new SSARec("2020", "71 yr., 2 mo.", "", "$41,848", "62 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2021", "72 yr., 2 mo.", "", "$41,848", "63 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2022", "73 yr., 2 mo.", "", "$41,848", "64 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2023", "74 yr., 2 mo.", "", "$41,848", "65 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2024", "75 yr., 2 mo.", "", "$41,848", "66 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2025", "76 yr., 2 mo.", "", "$41,848", "67 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2026", "77 yr., 2 mo.", "", "$41,848", "68 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2027", "78 yr., 2 mo.", "", "$41,848", "69 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2028", "79 yr., 2 mo.", "", "$41,848", "70 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2029", "80 yr., 2 mo.", "", "$41,848", "71 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2030", "81 yr., 2 mo.", "", "$41,848", "72 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2031", "82 yr., 2 mo.", "", "$41,848", "73 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2032", "83 yr., 2 mo.", "", "$41,848", "74 yr., 4 mo.", "", "$21,576"),//,,"$63,424"
+            new SSARec("2033", "84 yr., 2 mo.", "", "$34,874", "75 yr., 4 mo.", "+ Srvr-70-FRA", "$17,980"),//, "$6,974"),//,"$59,828"
+            new SSARec("2034", "", "", "", "76 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2035", "", "", "", "77 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2036", "", "", "", "78 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2037", "", "", "", "79 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2038", "", "", "", "80 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2039", "", "", "", "81 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2040", "", "", "", "82 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2041", "", "", "", "83 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2042", "", "", "", "84 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2043", "", "", "", "85 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2044", "", "", "", "86 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2045", "", "", "", "87 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2046", "", "", "", "88 yr., 4 mo.", "", "$41,848"),//,"$41,848"
+            new SSARec("2047", "", "", "", "89 yr., 4 mo.", "", "$27,899"),//,"$27,899"
     };
 
     private static class SSARec {
         public int year;
         public int ageMike;
         public String note;
-        public double incomeMike;
+        public double incomeMike = 0.0;
         public int ageNoga;
-        public double incomeNoga;
+        public double incomeNoga = 0.0;
 
         public SSARec(String s, String s1, String s2, String s3, String s4, String s5, String s6) {
             year = Integer.parseInt(s);
             incomeMike = s3.length() > 0 ? Double.parseDouble(s3.replace("$", "").replace(",", "")) : 0.0;
             incomeNoga = s6.length() > 0 ? Double.parseDouble(s6.replace("$", "").replace(",", "")) : 0.0;
+        }
+
+        public SSARec(String s, String s1, String s2, String s3) {
+            String ss = s.replace("\"", "");
+            year = Integer.parseInt(ss);
+            ss = s1.replace("\"", "");
+            incomeMike = ss.length() > 0 ? Double.parseDouble(ss.replace("$", "").replace(",", "")) : 0.0;
+            ss = s2.replace("\"", "");
+            incomeNoga = ss.length() > 0 ? Double.parseDouble(ss.replace("$", "").replace(",", "")) : 0.0;
+            ss = s3.replace("\"", "");
+            incomeNoga += ss.length() > 0 ? Double.parseDouble(ss.replace("$", "").replace(",", "")) : 0.0;
         }
     }
 
@@ -139,6 +156,63 @@ public class SSA {
             ""
 */
 
+    static SSARec[] SSARecs = null;
+
+    static public void init (String[] args) throws IOException {
+        for(int i = 0; i < args.length; ++i) {
+            String s = args[i];
+            if (s.equals("-loadSSA"))
+                load(args[i+1]);
+        }
+    }
+
+    private static boolean load(String fname) throws IOException {
+        File file = new File(fname);
+        List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+
+        int num = countRealLines(lines);
+
+        SSARecs = new SSARec[num-1];
+
+        for (int i = 1; i < num; ++i) {
+            String s = lines.get(i);
+
+//            String s = "Sachin,,M,\"Maths,Science,English\",Need to improve in these subjects.";
+            String[] split = s.split(",(?=([^\"]|\"[^\"]*\")*$)");
+
+//            boolean outside = true;
+//            int j = 0;
+//            while (outside && (s[j] != '"'))
+//            String[] a = lines.get(i).split("\",\"");
+
+            /*
+            "Year",,"Type(Mike)","Own(Mike)","Age on Jan 1(Noga)","Type(Noga)","Own(Noga)","Survivor's(Noga)","Combined Benefits"
+            "2018","69 yr., 2 mo.","Own-70","$6,974","60 yr., 4 mo.",,,,"$6,974"
+            [0]       [1]              [2]    [3]      [4]                [8]
+            "2027","78 yr., 2 mo.",       ,"$41,848","69 yr., 4 mo.","Own-70","$12,697",,"$54,545"
+            [0]       [1]              [2]    [3]      [4]              [5]      [6]       [8]
+             */
+            SSARec r = new SSARec(split[0], split[3], split[6], split[7]);
+            SSARecs[i-1] = r;
+        }
+        return true;
+    }
+
+    private static int countRealLines(List<String> lines) {
+        int i = 0;
+        for (String line : lines) {
+            String[] a = line.split(",");
+            String aa = a[0].replace("\"", "");
+            if (aa.equals("Year")){
+                // skip
+            }
+            else if (aa.equals("SUM OF BENEFITS"))
+                return i;
+            else
+                ++i;
+        }
+        return 0;
+    }
 
     public static double getIncome(Account general, int year, Scenario.People who) throws Exception {
         if (year < SSARecs[0].year)
@@ -147,7 +221,7 @@ public class SSA {
         double income = 0.0;
 
         int i = 0;
-        if (year > 2047) {
+        if (year > SSARecs[SSARecs.length - 1].year) {
             // extend last row of table
             i = SSARecs.length - 1;
         }

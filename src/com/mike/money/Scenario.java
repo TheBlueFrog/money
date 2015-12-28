@@ -52,6 +52,8 @@ public class Scenario {
 
     public Scenario(String[] args) throws Exception {
 
+        SSA.init(args);
+
         mExpenses = new Expenses(args);
 
         init (args);
