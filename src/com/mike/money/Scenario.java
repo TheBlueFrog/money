@@ -34,19 +34,19 @@ public class Scenario {
         }
         else {
             // real scenario
-            mAccounts.add(new GeneralAccount(this, "Wells Fargo",        People.Joint, 40000.0));
-            mAccounts.add(new TradingAccount(this, "College",            People.Joint, 150000.0));
-            mAccounts.add(new TradingAccount(this, "eBay stock eTrade",  People.Joint, 48000.0));
-            mAccounts.add(new TradingAccount(this, "Trading Ameritrade", People.Joint, 49000.0));
-            mAccounts.add(new TradingAccount(this, "Intel stock ?",      People.Joint, 0.0));
+            mAccounts.add(new GeneralAccount(this, "Wells Fargo",        People.Joint, 40000.0));       // as of 12/2015
+            mAccounts.add(new TradingAccount(this, "College",            People.Joint, (48027.0 * 3))); // "
+            mAccounts.add(new TradingAccount(this, "eBay stock eTrade",  People.Joint, 43545.0));       // "
+            mAccounts.add(new TradingAccount(this, "Trading Ameritrade", People.Joint, 51713.0));       // "
+            mAccounts.add(new TradingAccount(this, "Intel stock Fidelity", People.Joint, 3661.0));      // "
 
-            mAccounts.add(new TraditionalIRA(this, "Schwab",             People.Mike, 72000.0));
-            mAccounts.add(new TraditionalIRA(this, "IRA M Ameritrade",   People.Mike, 6500.0));
-            mAccounts.add(new InheritedTraditionalIRA(this, "Securion",  People.Mike, 137000.0));
-            mAccounts.add(new InheritedTraditionalIRA(this, "TIAA",      People.Mike, 68000.0));
-            mAccounts.add(new TraditionalIRA(this, "IRA N Ameritrade",   People.Noga, 6400.0));
-            mAccounts.add(new TraditionalIRA(this, "IRA N",              People.Noga, 16000.0));
-            mAccounts.add(new RothIRA(this,        "Roth M Ameritrade",  People.Mike, 16000.0));
+            mAccounts.add(new TraditionalIRA(this, "Schwab",             People.Mike, 72843.0));        // "
+            mAccounts.add(new TraditionalIRA(this, "IRA M Ameritrade",   People.Mike, 6242.0));         // "
+            mAccounts.add(new InheritedTraditionalIRA(this, "Securion",  People.Mike, 134654.0));       // " roi 3%
+            mAccounts.add(new InheritedTraditionalIRA(this, "TIAA",      People.Mike, 65560.0));        // " roi 1.5%
+            mAccounts.add(new TraditionalIRA(this, "IRA N Ameritrade",   People.Noga, 2372.0));         // "
+            mAccounts.add(new TraditionalIRA(this, "IRA N ?",            People.Noga, 16000.0));
+            mAccounts.add(new RothIRA(this,        "Roth M Ameritrade",  People.Mike, 15669.0));        // "
         }
     }
 
