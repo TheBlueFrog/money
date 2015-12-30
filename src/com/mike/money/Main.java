@@ -34,4 +34,13 @@ public class Main {
             e.printStackTrace();
         }
     }
+
+    static public void print(String s) {
+        System.out.println(s);
+    }
+
+    static public void print() {
+        System.out.println();
+    }
+
 }

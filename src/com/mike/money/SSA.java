@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * Created by mike on 12/21/2015.
+ *
+ * MIKE SSA $ 2352
  */
 public class SSA {
 
@@ -158,19 +160,33 @@ public class SSA {
 
     static SSARec[] SSARecs = null;
 
-    static public void init (String[] args) throws IOException {
+    static public void init(Scenario scenario, String[] args) throws Exception {
         for(int i = 0; i < args.length; ++i) {
             String s = args[i];
             if (s.equals("-loadSSA"))
-                load(args[i+1]);
+                load(scenario, args[i+1]);
         }
     }
 
-    private static boolean load(String fname) throws IOException {
+    private static boolean load(Scenario scenario, String fname) throws Exception {
         File file = new File(fname);
         List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
 
-        int num = countRealLines(lines);
+        scenario.print(fname);
+
+        {
+            // fname looks like "...-rnn-fnn..."
+            // the -r is the retire age for Noga
+            int i = fname.indexOf("-r");
+            String s = fname.substring(i+2, i+4);
+            int age = Integer.parseInt(s);
+            Simulation.mNogaRetireYear = Simulation.NogaBirthYear + age;
+            Main.print(String.format("Noga retires at age %d in %d", age, Simulation.mNogaRetireYear));
+        }
+
+        Simulation.mSSASummary = collectSummary(lines);
+
+        int num = countDataTableLines(lines);
 
         SSARecs = new SSARec[num-1];
 
@@ -192,13 +208,17 @@ public class SSA {
             "2027","78 yr., 2 mo.",       ,"$41,848","69 yr., 4 mo.","Own-70","$12,697",,"$54,545"
             [0]       [1]              [2]    [3]      [4]              [5]      [6]       [8]
              */
+
             SSARec r = new SSARec(split[0], split[3], split[6], split[7]);
             SSARecs[i-1] = r;
         }
+
+//        checkSpouseAgeToRetire(lines);
+
         return true;
     }
 
-    private static int countRealLines(List<String> lines) {
+    private static int countDataTableLines(List<String> lines) {
         int i = 0;
         for (String line : lines) {
             String[] a = line.split(",");
@@ -212,6 +232,30 @@ public class SSA {
                 ++i;
         }
         return 0;
+    }
+
+    private static void checkSpouseAgeToRetire (List<String> lines) throws Exception {
+        for (String line : lines) {
+            if (line.contains("Spouse's Age You Plan to Stop Working")) {
+                String[] a = line.split(",");
+                int i = Integer.parseInt(a[1].replace("\"", "").replace(" ", ""));
+                if (i != (Simulation.mNogaRetireYear - Simulation.NogaBirthYear))
+                    throw new Exception("Wrong year for Noga to retire");
+            }
+        }
+    }
+    private static String[] collectSummary (List<String> lines) throws Exception {
+        String[] sum = new String[3];
+        for (int i = 0; i < lines.size(); ++i) {
+            String line = lines.get(i);
+            if (line.contains("Recommended Solution:")) {
+                sum[0] = lines.get(i+1);
+                sum[1] = lines.get(i+2);
+                sum[2] = lines.get(i+3);
+                return sum;
+            }
+        }
+        return null;
     }
 
     public static double getIncome(Account general, int year, Scenario.People who) throws Exception {

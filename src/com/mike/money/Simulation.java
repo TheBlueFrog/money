@@ -18,8 +18,13 @@ public class Simulation {
     public static int mCurrentYear;
 
     public static boolean mStop = true;
+    public static int mNogaRetireYear = 0;
+    public static String[] mSSASummary = null;
 
     private Scenario mScenario;
+
+    // show all accounts
+    private boolean mShowAccounts = false;
 
     public Scenario getScenario () {
         return mScenario;
@@ -33,33 +38,54 @@ public class Simulation {
         if (doTest) {
             mStartYear = 2000;
             mEndYear = mStartYear + 10 + 1;
+            mShowAccounts = true;
         }
-//        else {
-//            for (int i = 0; i < args.length; ++i) {
-//                String arg = args[i];
-//                if (arg.equals("-noSSA"))
-//                    mUseSSA = false;
-//            }
-//        }
+        else {
+            for (int i = 0; i < args.length; ++i) {
+                String arg = args[i];
+                if (arg.equals("-showAccounts"))
+                    mShowAccounts = true;
+//                if (arg.equals("-nogaRetire"))
+//                    mNogaRetireYear = Integer.parseInt(args[++i]);
+            }
+        }
 
         mScenario = new Scenario(args);
     }
 
-
+/*         Mike age   Noga age    sell house
+  2015        66        57
+    16        67        58
+    17        68        59
+    18        69        60          300k
+    19        70        61
+    20        71        62
+    21        72        63
+    22        73        64
+    23        74        65
+    24        75        66
+    25        76        67
+    26        77        68
+    27        78        69
+    28        79        70
+ */
     public static int getYear() {
         return mCurrentYear;
     }
 
     public void run() throws Exception {
-        print();
+        mScenario.print();
+
+//        for (int i = 0; i < mSSASummary.length; ++i)
+//            Main.print(mSSASummary[i]);
 
         String fieldWidth = "%8s";
-        String format = String.format("%%4s %s%s%s%s%%s", fieldWidth, fieldWidth, fieldWidth, fieldWidth);
-        print(String.format(format,
-                "Year", "Expenses", "Taxes", "Liquid", "Assets",
-                mScenario.showAccountNames()));
+        String format = String.format("%%4s %s%s%s%s%s%s%s%%s", fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth);
+        Main.print(String.format(format,
+                "Year", "Work", "SSA", "MRD", "Taxes", "Expenses", "Liquid", "Assets",
+                mShowAccounts ? mScenario.showAccountNames() : ""));
         fieldWidth = "%8.0f";
-        format = String.format("%%4s %s%s%s%s%%s", fieldWidth, fieldWidth, fieldWidth, fieldWidth);
+        format = String.format("%%4s %s%s%s%s%s%s%s%%s", fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth);
 
         mCurrentYear = mStartYear;
         mStop = false;
@@ -70,14 +96,14 @@ public class Simulation {
 
             mScenario.depositInvestmentGain();
 
-            depositWorkIncome(general, People.Mike);
-            depositIRAIncome(general, People.Mike);
+            double workIncome =   depositWorkIncome(general, People.Mike)
+                                + depositWorkIncome(general, People.Noga);
 
-            depositWorkIncome(general, People.Noga);
-            depositIRAIncome(general, People.Noga);
+            double mrd =  depositIRAIncome(general, People.Mike)
+                        + depositIRAIncome(general, People.Noga);
 
-            depositSSAIncome(general, People.Mike);
-            depositSSAIncome(general, People.Noga);
+            double ssa =   depositSSAIncome(general, People.Mike)
+                         + depositSSAIncome(general, People.Noga);
 
 //            double fakeExpenses = 0.0;
 //            if (doTest) {
@@ -87,10 +113,20 @@ public class Simulation {
 //                fakeExpenses += mScenario.testDrawDown(general, Account.AccountType.General);
 //            }
 
-            double taxableIncome = general.getBalance() - startOfYearBalance;
+            double taxableIncome =   general.getBalance()
+                                   - startOfYearBalance
+                                   - (ssa * 0.15);         // up to 85% of SSA is taxable, apparently
             double tax = getTax(taxableIncome);
             double taxPaid = taxableIncome * tax;
+
+            // pay taxes
             general.withdraw(taxPaid);
+
+            // proceeds of house
+            if (mCurrentYear == 2019)
+            general.deposit(300000.0);
+
+            // pay expenses
 
             double expenses = mScenario.getExpenses(mCurrentYear) + taxPaid;
 
@@ -100,18 +136,18 @@ public class Simulation {
             }
 
             double liquidated = 0.0;
-            if (general.getBalance() >= expenses) {
-                general.withdraw(expenses);
-            }
-            else {
+            if (general.getBalance() < expenses) {
                 liquidated = mScenario.liquidate(general, expenses - general.getBalance());
                 general.deposit(liquidated);
             }
+            general.withdraw(expenses);
 
-            print(String.format(format,
+            //                 "Year", "Work", "SSA", "MRD", "Taxes", "Expenses", "Liquid", "Assets",
+
+            Main.print(String.format(format,
                     mCurrentYear,
-                    expenses, taxPaid, liquidated, mScenario.getAssets(),
-                    mScenario.showAccountBalances()));
+                    workIncome, ssa, mrd, taxPaid, expenses, liquidated, mScenario.getAssets(),
+                    mShowAccounts ? mScenario.showAccountBalances() : ""));
 
             mCurrentYear++;
         }
@@ -150,7 +186,7 @@ public class Simulation {
      * @param who
      * @return work income
      */
-    private void depositWorkIncome(Account general, People who) throws Exception {
+    private double depositWorkIncome(Account general, People who) throws Exception {
         double income = 0.0;
 
         if (doTest) {
@@ -158,32 +194,31 @@ public class Simulation {
         }
         else
             if (who.equals(People.Noga)) {
-                if (mCurrentYear <= 2019)
-                    income += 110000.00;
+                if (mCurrentYear <= mNogaRetireYear) {
+//                    Main.print("Noga working");
+                    income += 100000.00;
+
+                    mScenario.addToIRA(4000.0, who);
+                    mScenario.addToStock(4000.0, who);
+                }
             }
 
         general.deposit(income);
+        return income;
     }
 
     /**
      * @param who
      * @return minimum distribution income from IRA
      */
-    private void depositIRAIncome(Account general, People who) throws Exception {
-        mScenario.depositMRD(general, mCurrentYear, who);
+    private double depositIRAIncome(Account general, People who) throws Exception {
+        return mScenario.depositMRD(general, mCurrentYear, who);
     }
 
-    private void depositSSAIncome(Account general, People who) throws Exception {
-        SSA.getIncome(general, mCurrentYear, who);
+    private double depositSSAIncome(Account general, People who) throws Exception {
+        return SSA.getIncome(general, mCurrentYear, who);
     }
 
-    public void print(String s) {
-        System.out.println(s);
-    }
-
-    public void print() {
-        mScenario.print();
-    }
 
 }
 

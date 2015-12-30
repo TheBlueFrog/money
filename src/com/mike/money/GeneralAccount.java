@@ -16,8 +16,9 @@ public class GeneralAccount extends Account{
     }
 
     @Override
-    public void depositMRD(Account general, int age) throws Exception {
+    public double depositMRD(Account general, Scenario.People who, int age) throws Exception {
         // doesn't apply
+        return 0;
     }
 
 }

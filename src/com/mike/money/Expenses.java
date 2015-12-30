@@ -11,48 +11,50 @@ import java.util.Map;
 public class Expenses {
 
     static private double TuitionPerYear = 15000.0;
-    static private double BasicBurnRate = 6000.0 * 12;
+    static private double BasicBurnRate = 5500.0 * 12;
 
     static private Map<Integer, Double> expensesForYear = new HashMap<Integer, Double>();
     static
     {
+        double extra = (400 * 12); // extra help for a kid
+
         int y = 2015;
-        expensesForYear.put(y++, BasicBurnRate + TuitionPerYear);     // kids plus Tal in school sophmore
-        expensesForYear.put(y++, BasicBurnRate + TuitionPerYear);     // kids plus Tal in school junior
-        expensesForYear.put(y++, BasicBurnRate + TuitionPerYear);     // kids plus Tal in school senior
-        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + 6000);     // no kids guys in school freshmen + Tal help
-        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + 6000);     // no kids guys in school soph
+        expensesForYear.put(y++, BasicBurnRate + TuitionPerYear + extra);     // kids plus Tal in school sophmore
+        expensesForYear.put(y++, BasicBurnRate + TuitionPerYear + extra);     // kids plus Tal in school junior
+        expensesForYear.put(y++, BasicBurnRate + TuitionPerYear + extra);     // kids plus Tal in school senior
+        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + (extra * 3));     // no kids guys in school freshmen + Tal help
+        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + (extra * 3));     // no kids guys in school soph
         // 2020
-        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + 2000);     // no kids guys in school junior
-        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + 2000);     // no kids guys in school senior
-        expensesForYear.put(y++, BasicBurnRate + 12000.0);     // no kids bit of help
-        expensesForYear.put(y++, BasicBurnRate + 12000.0);     // no kids bit of help
-        expensesForYear.put(y++, BasicBurnRate + 6000.0);     // no kids bit of help
-        expensesForYear.put(y++, BasicBurnRate + 6000.0);     // no kids bit of help
-        expensesForYear.put(y++, BasicBurnRate + 6000.0);     // no kids bit of help
-        expensesForYear.put(y++, BasicBurnRate + 3000.0);     // no kids bit of help
-        expensesForYear.put(y++, BasicBurnRate + 3000.0);     // no kids bit of help
-        expensesForYear.put(y++, BasicBurnRate + 3000.0);     // no kids bit of help
+        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + (extra * 2));     // no kids guys in school junior
+        expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + (extra * 2));     // no kids guys in school senior
+        expensesForYear.put(y++, BasicBurnRate + (extra * 2));      // no kids bit of help
+        expensesForYear.put(y++, BasicBurnRate + (extra * 2));      // no kids bit of help
+        expensesForYear.put(y++, BasicBurnRate + extra);            // no kids bit of help
+        expensesForYear.put(y++, BasicBurnRate + extra);            // no kids bit of help
+        expensesForYear.put(y++, BasicBurnRate + extra);            // no kids bit of help
+        expensesForYear.put(y++, BasicBurnRate + (extra * 0.5));     // no kids bit of help
+        expensesForYear.put(y++, BasicBurnRate + (extra * 0.5));     // no kids bit of help
+        expensesForYear.put(y++, BasicBurnRate + (extra * 0.5));     // no kids bit of help
         // 2030
-        expensesForYear.put(y++, BasicBurnRate + 3000.0);     // no kids bit of help
+        expensesForYear.put(y++, BasicBurnRate + (extra * 0.5));     // no kids bit of help
         expensesForYear.put(y++, BasicBurnRate);     // just us
         expensesForYear.put(y++, BasicBurnRate);
         expensesForYear.put(y++, BasicBurnRate);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
+        expensesForYear.put(y++, BasicBurnRate);
+        expensesForYear.put(y++, BasicBurnRate);
+        expensesForYear.put(y++, BasicBurnRate);
+        expensesForYear.put(y++, BasicBurnRate);
+        expensesForYear.put(y++, BasicBurnRate);
+        expensesForYear.put(y++, BasicBurnRate);
         // 2040
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);     // just noga
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
-        expensesForYear.put(y++, BasicBurnRate * 0.5);
+        expensesForYear.put(y++, BasicBurnRate * 0.7);
+        expensesForYear.put(y++, BasicBurnRate * 0.7);     // just noga
+        expensesForYear.put(y++, BasicBurnRate * 0.7);
+        expensesForYear.put(y++, BasicBurnRate * 0.7);
+        expensesForYear.put(y++, BasicBurnRate * 0.7);
+        expensesForYear.put(y++, BasicBurnRate * 0.7);
+        expensesForYear.put(y++, BasicBurnRate * 0.7);
+        expensesForYear.put(y++, BasicBurnRate * 0.7);
     };
 
     public Expenses(String[] args) {

@@ -7,6 +7,26 @@ import java.util.*;
  */
 public class Scenario {
 
+    public void addToIRA(double v, People owner) throws Exception {
+        for(Account a : mAccounts) {
+            if (a instanceof TraditionalIRA) {
+                if (a.mOwner.equals(owner)) {
+                    a.deposit(v);
+                }
+            }
+        }
+    }
+
+    public void addToStock(double v, People owner) throws Exception {
+        for(Account a : mAccounts) {
+            if (a.getName().startsWith("Intel stock")) {
+                if (a.mOwner.equals(owner)) {
+                    a.deposit(v);
+                }
+            }
+        }
+    }
+
     static public enum People { Mike, Noga, Joint };
 
     public double mInterestIncomeRate = 0.010;
@@ -14,6 +34,12 @@ public class Scenario {
     private List<Account> mAccounts = new ArrayList<Account>();
 
     private Expenses mExpenses;
+
+    /*
+    The three major areas of difference between a 401(k) and a Roth IRA are tax treatment, investment
+    options and possible employer contributions.
+     */
+
 
     // setup default data for run
     // the ordering is the order displayed
@@ -34,16 +60,21 @@ public class Scenario {
         }
         else {
             // real scenario
-            mAccounts.add(new GeneralAccount(this, "Wells Fargo",        People.Joint, 40000.0));       // as of 12/2015
-            mAccounts.add(new TradingAccount(this, "College",            People.Joint, (48027.0 * 3))); // "
-            mAccounts.add(new TradingAccount(this, "eBay stock eTrade",  People.Joint, 43545.0));       // "
+            mAccounts.add(new GeneralAccount(this, "Wells Fargo",        People.Joint, 40000.0));       // as of 12/28/2015
+            mAccounts.add(new TradingAccount(this, "College Wells",      People.Joint, (48027.0 * 3))); // "
             mAccounts.add(new TradingAccount(this, "Trading Ameritrade", People.Joint, 51713.0));       // "
-            mAccounts.add(new TradingAccount(this, "Intel stock Fidelity", People.Joint, 3661.0));      // "
 
-            mAccounts.add(new TraditionalIRA(this, "Schwab",             People.Mike, 72843.0));        // "
-            mAccounts.add(new TraditionalIRA(this, "IRA M Ameritrade",   People.Mike, 6242.0));         // "
+            mAccounts.add(new TradingAccount(this, "eBay stock eTrade",  People.Mike, 43545.0));       // "
+            mAccounts.add(new TraditionalIRA(this, "eBay 401 Schwab",    People.Mike, 72843.0));        // "
+
+            // this literal is used somewhere
+            mAccounts.add(new TradingAccount(this, "Intel stock ? ",     People.Noga, 2000.0));
+            mAccounts.add(new TraditionalIRA(this, "Intel 401 Fidelity", People.Noga, 3661.0));        // "
+
             mAccounts.add(new InheritedTraditionalIRA(this, "Securion",  People.Mike, 134654.0));       // " roi 3%
             mAccounts.add(new InheritedTraditionalIRA(this, "TIAA",      People.Mike, 65560.0));        // " roi 1.5%
+
+            mAccounts.add(new TraditionalIRA(this, "IRA M Ameritrade",   People.Mike, 6242.0));         // "
             mAccounts.add(new TraditionalIRA(this, "IRA N Ameritrade",   People.Noga, 2372.0));         // "
             mAccounts.add(new TraditionalIRA(this, "IRA N ?",            People.Noga, 16000.0));
             mAccounts.add(new RothIRA(this,        "Roth M Ameritrade",  People.Mike, 15669.0));        // "
@@ -52,7 +83,7 @@ public class Scenario {
 
     public Scenario(String[] args) throws Exception {
 
-        SSA.init(args);
+        SSA.init(this, args);
 
         mExpenses = new Expenses(args);
 
@@ -126,10 +157,10 @@ public class Scenario {
 //        }
 
         if (Simulation.doTest && (Simulation.getYear() == 2010)) {
-            Main.simulation.print(String.format("Test passes, went broke at 10 years, short %9.0f", amount));
+            Main.print(String.format("Test passes, went broke at 10 years, short %9.0f", amount));
         }
         else {
-            Main.simulation.print(String.format("Gone broke!, short %9.0f", amount));
+            Main.print(String.format("Gone broke!, short %9.0f", amount));
         }
         Simulation.mStop = true;
         return withdrawn;
@@ -144,12 +175,12 @@ public class Scenario {
     }
 
     public void print() {
-        Main.simulation.print(String.format("Initial investment $%.0f", getAssets()));
-        Main.simulation.print(String.format("Annual investment income rate %.4f", mInterestIncomeRate));
-        Main.simulation.print(String.format("Start-end years: %d-%d", Simulation.mStartYear, Simulation.mEndYear));
+//        Main.simulation.print(String.format("Initial investment $%.0f", getAssets()));
+        Main.print(String.format("Annual investment income rate %.4f", mInterestIncomeRate));
+//        Main.simulation.print(String.format("Start-end years: %d-%d", Simulation.mStartYear, Simulation.mEndYear));
     }
     public void print(String s) {
-        Main.simulation.print(s);
+        Main.print(s);
     }
 
     public double getExpenses(int year) throws Exception {
@@ -169,11 +200,14 @@ public class Scenario {
         return year - birthYear;
     }
 
-    public void depositMRD(Account general, int year, People who) throws Exception {
+    public double depositMRD(Account general, int year, People who) throws Exception {
         int age = getAge(year, who);
+        double d = 0.0;
 
         for (Account a : mAccounts)
-            a.depositMRD(general, age);
+            d += a.depositMRD(general, who, age);
+
+        return d;
     }
 
 //    private List<Account> orderAccounts () {

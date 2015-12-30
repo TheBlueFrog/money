@@ -1,7 +1,5 @@
 package com.mike.money;
 
-import java.util.UUID;
-
 /**
  * Created by mike on 12/22/2015.
  */
@@ -15,7 +13,7 @@ public abstract class Account {
 
     private double mBalance;    // current balance in the account
 
-    private Scenario.People mOwner;
+    protected Scenario.People mOwner;
 
     protected Account(Scenario s, String name, Scenario.People owner, double balance) {
 
@@ -58,6 +56,6 @@ public abstract class Account {
 
     abstract public void depositInvestmentGain() throws Exception;
 
-    abstract public void depositMRD(Account general, int age) throws Exception;
+    abstract public double depositMRD(Account general, Scenario.People who, int age) throws Exception;
 
 }

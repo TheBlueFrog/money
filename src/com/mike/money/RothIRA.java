@@ -9,7 +9,8 @@ public class RothIRA extends IRA {
     }
 
     @Override
-    public void depositMRD(Account general, int age) throws Exception {
+    public double depositMRD(Account general, Scenario.People who, int age) throws Exception {
         // no MRD
+        return 0;
     }
 }

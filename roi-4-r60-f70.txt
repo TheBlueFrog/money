@@ -1,0 +1,7 @@
+SSAnalyze-r60-f70.csv
+Noga retires at age 60 in 2017
+Annual investment income rate 0.0400
+Year     Work     SSA     MRD   TaxesExpenses  Liquid  Assets  Wells F  College  Trading  eBay st  eBay 40  Intel s  Intel 4 Securion     TIAA  IRA M A  IRA N A  IRA N ?  Roth M 
+2015   100000       0    7599   26920  112720       0  597114     8040   149844    53782    45287    75757     6080     7807   134929    65694     6492     6467    20640    16296
+2016   100000       0    7615   26908  112708   23945  597077        0   131893    55933    47098    78787    10323    12120   135205    65828     6751    10726    25466    16948
+2017   100000       0    7630   26908  112708   31985  597345        0   105184    58170    48982    81938    14736    16605   135481    65963     7021    15155    30484    17625
