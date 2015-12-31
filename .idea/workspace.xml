@@ -2,25 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9a15c13-c0e8-4902-b1dc-00c18dd9438b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/arun.bat" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/SSAnalyze-N60-F62.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/SSAnalyze-N65-F70.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/roi-1-nr62-nf62.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/roi-1-nr65-nf70.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/roi-2-nr62-nf62.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/roi-2-nr65-nf70.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/roi-4-nr62-nf62.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/roi-4-nr65-nf70.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Account.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Account.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-1-r60-f70.txt" afterPath="$PROJECT_DIR$/roi-1-r60-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-1-r62-f70.txt" afterPath="$PROJECT_DIR$/roi-1-r62-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-1-r65-f70.txt" afterPath="$PROJECT_DIR$/roi-1-r65-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-2-r60-f70.txt" afterPath="$PROJECT_DIR$/roi-2-r60-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-2-r62-f70.txt" afterPath="$PROJECT_DIR$/roi-2-r62-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-2-r65-f70.txt" afterPath="$PROJECT_DIR$/roi-2-r65-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-3-r60-f70.txt" afterPath="$PROJECT_DIR$/roi-3-r60-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-3-r62-f70.txt" afterPath="$PROJECT_DIR$/roi-3-r62-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-3-r65-f70.txt" afterPath="$PROJECT_DIR$/roi-3-r65-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-4-r60-f70.txt" afterPath="$PROJECT_DIR$/roi-4-r60-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-4-r62-f70.txt" afterPath="$PROJECT_DIR$/roi-4-r62-f70.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roi-4-r65-f70.txt" afterPath="$PROJECT_DIR$/roi-4-r65-f70.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Expenses.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Expenses.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/GeneralAccount.java" afterPath="$PROJECT_DIR$/src/com/mike/money/GeneralAccount.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Main.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/RothIRA.java" afterPath="$PROJECT_DIR$/src/com/mike/money/RothIRA.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/SSA.java" afterPath="$PROJECT_DIR$/src/com/mike/money/SSA.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Scenario.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Scenario.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Simulation.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Simulation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/TraditionalIRA.java" afterPath="$PROJECT_DIR$/src/com/mike/money/TraditionalIRA.java" />
     </list>
     <ignored path="money.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,11 +39,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Scenario.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mike/money/Scenario.java">
+      <file leaf-file-name="roi-1-r65-f70.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/roi-1-r65-f70.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+              <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -65,51 +59,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Account.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mike/money/Account.java">
+      <file leaf-file-name="Expenses.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mike/money/Expenses.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+              <caret line="46" column="48" selection-start-line="46" selection-start-column="48" selection-end-line="46" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="roi-1-r65-f70.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/roi-1-r65-f70.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="roi-4-r65-f70.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="roi-4-r65-f70.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/roi-4-r65-f70.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.22906977">
               <caret line="13" column="112" selection-start-line="13" selection-start-column="112" selection-end-line="13" selection-end-column="112" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="roi-4-r62-f70.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="roi-4-r62-f70.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/roi-4-r62-f70.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26275116">
+            <state vertical-scroll-proportion="0.0">
               <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="arun.bat" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/arun.bat">
+      <file leaf-file-name="roi-4-r60-f70.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/roi-4-r60-f70.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.9259257">
-              <caret line="11" column="112" selection-start-line="11" selection-start-column="112" selection-end-line="11" selection-end-column="112" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -119,7 +103,7 @@
         <entry file="file://$PROJECT_DIR$/roi-3-r65-f70.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="57" selection-start-line="45" selection-start-column="57" selection-end-line="45" selection-end-column="57" />
+              <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -139,7 +123,17 @@
         <entry file="file://$PROJECT_DIR$/roi-2-r65-f70.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="44" />
+              <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="roi-2-r62-f70.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/roi-2-r62-f70.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -186,17 +180,17 @@
         <option value="$PROJECT_DIR$/src/com/mike/money/TraditionalIRA.java" />
         <option value="$PROJECT_DIR$/roi-1-r62-f70.txt" />
         <option value="$PROJECT_DIR$/roi-1-r65-f70.txt" />
-        <option value="$PROJECT_DIR$/src/com/mike/money/Expenses.java" />
         <option value="$PROJECT_DIR$/roi-4-r65-f70.txt" />
         <option value="$PROJECT_DIR$/arun.bat" />
         <option value="$PROJECT_DIR$/src/com/mike/money/Scenario.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/Simulation.java" />
+        <option value="$PROJECT_DIR$/src/com/mike/money/Expenses.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="147" />
-    <option name="y" value="51" />
+    <option name="x" value="118" />
+    <option name="y" value="21" />
     <option name="width" value="1678" />
     <option name="height" value="1021" />
   </component>
@@ -689,7 +683,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="147" y="51" width="1678" height="1021" extended-state="0" />
+    <frame x="118" y="21" width="1678" height="1021" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -703,7 +697,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15451175" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23986487" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23986487" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1134,38 +1128,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roi-4-r60-f70.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/roi-2-r62-f70.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Expenses.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/roi-1-r65-f70.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/arun.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.9259257">
@@ -1182,7 +1144,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Scenario.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roi-4-r60-f70.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/roi-3-r62-f70.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roi-2-r62-f70.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1193,23 +1179,15 @@
     <entry file="file://$PROJECT_DIR$/roi-2-r65-f70.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="44" />
+          <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roi-4-r65-f70.txt">
+    <entry file="file://$PROJECT_DIR$/roi-1-r65-f70.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="112" selection-start-line="13" selection-start-column="112" selection-end-line="13" selection-end-column="112" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Scenario.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -1222,18 +1200,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roi-3-r65-f70.txt">
+    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Expenses.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="57" selection-start-line="45" selection-start-column="57" selection-end-line="45" selection-end-column="57" />
+          <caret line="46" column="48" selection-start-line="46" selection-start-column="48" selection-end-line="46" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/roi-4-r62-f70.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26275116">
+        <state vertical-scroll-proportion="0.0">
           <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roi-3-r65-f70.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roi-4-r65-f70.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22906977">
+          <caret line="13" column="112" selection-start-line="13" selection-start-column="112" selection-end-line="13" selection-end-column="112" />
           <folding />
         </state>
       </provider>
