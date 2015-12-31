@@ -14,3 +14,7 @@ java -cp out\production\money com.mike.money.Main -loadSSA SSAnalyze-r65-f70.csv
 java -cp out\production\money com.mike.money.Main -loadSSA SSAnalyze-r60-f70.csv -roi 0.04 -showAccounts > roi-4-r60-f70.txt
 java -cp out\production\money com.mike.money.Main -loadSSA SSAnalyze-r62-f70.csv -roi 0.04 -showAccounts > roi-4-r62-f70.txt
 java -cp out\production\money com.mike.money.Main -loadSSA SSAnalyze-r65-f70.csv -roi 0.04 -showAccounts > roi-4-r65-f70.txt
+
+java -cp out\production\money com.mike.money.Main -loadSSA SSAnalyze-r60-f70.csv -roi 0.05 -showAccounts > roi-5-r60-f70.txt
+java -cp out\production\money com.mike.money.Main -loadSSA SSAnalyze-r62-f70.csv -roi 0.05 -showAccounts > roi-5-r62-f70.txt
+java -cp out\production\money com.mike.money.Main -loadSSA SSAnalyze-r65-f70.csv -roi 0.05 -showAccounts > roi-5-r65-f70.txt

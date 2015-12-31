@@ -7,25 +7,10 @@ import java.util.*;
  */
 public class Scenario {
 
-    public void addToIRA(double v, People owner) throws Exception {
-        for(Account a : mAccounts) {
-            if (a instanceof TraditionalIRA) {
-                if (a.mOwner.equals(owner)) {
-                    a.deposit(v);
-                }
-            }
-        }
-    }
 
-    public void addToStock(double v, People owner) throws Exception {
-        for(Account a : mAccounts) {
-            if (a.getName().startsWith("Intel stock")) {
-                if (a.mOwner.equals(owner)) {
-                    a.deposit(v);
-                }
-            }
-        }
-    }
+    private Map<Integer, List<Double>> specials = new HashMap<Integer, List<Double>>();
+
+    private Map<Integer, Double> nogaSalary = new HashMap<Integer, Double>();
 
     static public enum People { Mike, Noga, Joint };
 
@@ -79,6 +64,34 @@ public class Scenario {
             mAccounts.add(new TraditionalIRA(this, "IRA N UBS",          People.Noga, 8031.0));         // "
             mAccounts.add(new RothIRA(this,        "Roth M Ameritrade",  People.Mike, 15669.0));        // "
         }
+
+        initSpecialsIncome(args);
+        initNogaSalary(args);
+    }
+
+    private void initSpecialsIncome (String[] args) {
+
+        List<Double> x = new ArrayList<Double>();
+        x.add(300000.0);      // net after downsizing house
+
+        specials.put(2018, x);
+    }
+    private void initNogaSalary (String[] args) {
+        nogaSalary.put(2015, 100000.0);
+        nogaSalary.put(2016, 101000.0);
+        nogaSalary.put(2017, 102000.0);
+        nogaSalary.put(2018, 103000.0);
+        nogaSalary.put(2019, 104000.0);
+        nogaSalary.put(2020, 105000.0);
+        nogaSalary.put(2021, 106000.0);
+        nogaSalary.put(2022, 107000.0);
+        nogaSalary.put(2023, 108000.0);
+        nogaSalary.put(2024, 109000.0);
+        nogaSalary.put(2025, 110000.0);
+        nogaSalary.put(2026, 111000.0);
+        nogaSalary.put(2027, 112000.0);
+        nogaSalary.put(2028, 113000.0);
+        nogaSalary.put(2029, 114000.0);
     }
 
     public Scenario(String[] args) throws Exception {
@@ -103,6 +116,60 @@ public class Scenario {
 //            }
 //
         }
+    }
+
+    public void addToIRA(double v, People owner) throws Exception {
+        for(Account a : mAccounts) {
+            if (a instanceof TraditionalIRA) {
+                if (a.mOwner.equals(owner)) {
+                    a.deposit(v);
+                }
+            }
+        }
+    }
+
+    public void addToStock(double v, People owner) throws Exception {
+        for(Account a : mAccounts) {
+            if (a.getName().startsWith("Intel stock")) {
+                if (a.mOwner.equals(owner)) {
+                    a.deposit(v);
+                }
+            }
+        }
+    }
+
+    public void depositAfterTaxSpecials(Account general, int year) throws Exception {
+        if (specials.containsKey(year))
+            for (double d : specials.get(year))
+                general.deposit(d);
+    }
+
+    /**
+     *
+     * @param general
+     * @param who
+     * @param simulation
+     * @return work income
+     */
+    double depositWorkIncome(Account general, People who, Simulation simulation) throws Exception {
+        double income = 0.0;
+
+        if (Simulation.doTest) {
+            income = 10.0;
+        }
+        else
+        if (who.equals(People.Noga)) {
+            if (Simulation.mCurrentYear <= Simulation.mNogaRetireYear) {
+//                    Main.print("Noga working");
+                income = nogaSalary.get(Simulation.mCurrentYear);
+
+                addToIRA(0.08 * income, who);
+                addToStock(0.08 * income, who);
+            }
+        }
+
+        general.deposit(income);
+        return income;
     }
 
     public Account getGeneralAccount() throws Exception {

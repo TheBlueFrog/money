@@ -14,7 +14,7 @@ public class Simulation {
     static public boolean doTest = false;
 
     static public int mStartYear = 2015;
-    static public int mEndYear = 2057;
+    static public int mEndYear = 2047;
     public static int mCurrentYear;
 
     public static boolean mStop = true;
@@ -96,8 +96,8 @@ public class Simulation {
 
             mScenario.depositInvestmentGain();
 
-            double workIncome =   depositWorkIncome(general, People.Mike)
-                                + depositWorkIncome(general, People.Noga);
+            double workIncome =   mScenario.depositWorkIncome(general, People.Mike, this)
+                                + mScenario.depositWorkIncome(general, People.Noga, this);
 
             double mrd =  depositIRAIncome(general, People.Mike)
                         + depositIRAIncome(general, People.Noga);
@@ -122,9 +122,7 @@ public class Simulation {
             // pay taxes
             general.withdraw(taxPaid);
 
-            // proceeds of house
-            if (mCurrentYear == 2019)
-            general.deposit(300000.0);
+            mScenario.depositAfterTaxSpecials (general, mCurrentYear);
 
             // pay expenses
 
@@ -180,31 +178,6 @@ public class Simulation {
             tax = 0.28;
 
         return tax;
-    }
-
-    /**
-     * @param who
-     * @return work income
-     */
-    private double depositWorkIncome(Account general, People who) throws Exception {
-        double income = 0.0;
-
-        if (doTest) {
-            income = 10.0;
-        }
-        else
-            if (who.equals(People.Noga)) {
-                if (mCurrentYear <= mNogaRetireYear) {
-//                    Main.print("Noga working");
-                    income += 100000.00;
-
-                    mScenario.addToIRA(4000.0, who);
-                    mScenario.addToStock(4000.0, who);
-                }
-            }
-
-        general.deposit(income);
-        return income;
     }
 
     /**

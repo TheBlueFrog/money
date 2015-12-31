@@ -12,6 +12,8 @@ public class Expenses {
 
     static private double TuitionPerYear = (4200.0 * 3);                    // OSU 1st term 2016 $4150
     static private double BasicBurnRate = 5500.0 * 12;                      // 7/1/2015 - 12/30/2015 total expenses $33k
+                                                                            // exclusive of Tal tuition and $1k/mo support
+
 
     static private Map<Integer, Double> expensesForYear = new HashMap<Integer, Double>();
     static
@@ -24,6 +26,7 @@ public class Expenses {
         expensesForYear.put(y++, BasicBurnRate + TuitionPerYear + extra);                   // kids plus Tal in school senior
         expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + (extra * 0.5) + (extra * 2)); // no kids guys in school freshmen + Tal               help
         expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + (extra * 0.5) + (extra * 2));       // no kids guys in school soph
+
         // 2020
         expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + (extra * 0.5) + (extra * 2));      // no kids guys in school junior
         expensesForYear.put(y++, BasicBurnRate + (TuitionPerYear * 2) + (extra * 0.5) + (extra * 2));       // no kids guys in school senior
@@ -35,6 +38,7 @@ public class Expenses {
         expensesForYear.put(y++, BasicBurnRate + (extra * 0.5));                            // no kids bit of help
         expensesForYear.put(y++, BasicBurnRate + (extra * 0.5));                            // no kids bit of help
         expensesForYear.put(y++, BasicBurnRate + (extra * 0.5));                            // no kids bit of help
+
         // 2030
         expensesForYear.put(y++, BasicBurnRate + (extra * 0.5));                            // no kids bit of help
         expensesForYear.put(y++, BasicBurnRate);                                            // just us
@@ -44,17 +48,17 @@ public class Expenses {
         expensesForYear.put(y++, BasicBurnRate);
         expensesForYear.put(y++, BasicBurnRate);
         expensesForYear.put(y++, BasicBurnRate);
-        expensesForYear.put(y++, BasicBurnRate);
+        expensesForYear.put(y++, BasicBurnRate);            // 2039 Mike is 90
         expensesForYear.put(y++, BasicBurnRate);
         // 2040
         expensesForYear.put(y++, BasicBurnRate * 0.7);
-        expensesForYear.put(y++, BasicBurnRate * 0.7);                                      // just noga
         expensesForYear.put(y++, BasicBurnRate * 0.7);
         expensesForYear.put(y++, BasicBurnRate * 0.7);
         expensesForYear.put(y++, BasicBurnRate * 0.7);
         expensesForYear.put(y++, BasicBurnRate * 0.7);
         expensesForYear.put(y++, BasicBurnRate * 0.7);
         expensesForYear.put(y++, BasicBurnRate * 0.7);
+        expensesForYear.put(y++, BasicBurnRate * 0.7);      // 2047 Noga is 90
     };
 
     public Expenses(String[] args) {
