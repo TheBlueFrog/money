@@ -68,7 +68,7 @@ public class Scenario {
             mAccounts.add(new TraditionalIRA(this, "eBay 401 Schwab",    People.Mike, 72843.0));        // "
 
             // this literal is used somewhere
-            mAccounts.add(new TradingAccount(this, "Intel stock ? ",     People.Noga, 2000.0));
+            mAccounts.add(new TradingAccount(this, "Intel stock ? ",     People.Noga, 2000.0));         // <<<<<<<<<<<<<<<<<<<<< guess
             mAccounts.add(new TraditionalIRA(this, "Intel 401 Fidelity", People.Noga, 3661.0));        // "
 
             mAccounts.add(new InheritedTraditionalIRA(this, "Securion",  People.Mike, 134654.0));       // " roi 3%
@@ -76,7 +76,7 @@ public class Scenario {
 
             mAccounts.add(new TraditionalIRA(this, "IRA M Ameritrade",   People.Mike, 6242.0));         // "
             mAccounts.add(new TraditionalIRA(this, "IRA N Ameritrade",   People.Noga, 2372.0));         // "
-            mAccounts.add(new TraditionalIRA(this, "IRA N ?",            People.Noga, 16000.0));
+            mAccounts.add(new TraditionalIRA(this, "IRA N UBS",          People.Noga, 8031.0));         // "
             mAccounts.add(new RothIRA(this,        "Roth M Ameritrade",  People.Mike, 15669.0));        // "
         }
     }
