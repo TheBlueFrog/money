@@ -9,8 +9,14 @@ public class TradingAccount extends GeneralAccount {
     }
 
     @Override
-    public void depositInvestmentGain() throws Exception {
+    public void yearlyUpdate() throws Exception {
         double d = getBalance() * mScenario.mInterestIncomeRate;
         deposit(d);
+
+        mChange += d;
+
+        // if we are sitting on the stock there is no gain, if sold
+        // there is, we tax all liquidations...so call this zero
+        mYearsTaxableGain = 0.0;
     }
 }

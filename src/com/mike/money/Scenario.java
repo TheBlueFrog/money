@@ -12,6 +12,11 @@ public class Scenario {
 
     private Map<Integer, Double> nogaSalary = new HashMap<Integer, Double>();
 
+    public void endOfYear() {
+        for (Account a : mAccounts)
+            a.endOfYearReset();
+    }
+
     static public enum People { Mike, Noga, Joint };
 
     public double mInterestIncomeRate = 0.010;
@@ -70,6 +75,11 @@ public class Scenario {
     }
 
     private void initSpecialsIncome (String[] args) {
+        for(String s : args)
+            if (s.equals("-noSpecials")) {
+                Main.print("No special after-tax income");
+                return;
+            }
 
         List<Double> x = new ArrayList<Double>();
         x.add(300000.0);      // net after downsizing house
@@ -116,6 +126,14 @@ public class Scenario {
 //            }
 //
         }
+    }
+
+    public double getAccountTaxableIncome() {
+        double d = 0.0;
+        for(Account a : mAccounts) {
+            d += a.mYearsTaxableGain;
+        }
+        return d;
     }
 
     public void addToIRA(double v, People owner) throws Exception {
@@ -189,9 +207,11 @@ public class Scenario {
         dst.deposit(amount);
     }
 
-    public void depositInvestmentGain() throws Exception {
-        for (Account a : mAccounts)
-            a.depositInvestmentGain();
+    public void updateAccounts() throws Exception {
+        for (Account a : mAccounts) {
+            a.mYearsTaxableGain = 0.0;
+            a.yearlyUpdate();
+        }
     }
 
     public double liquidate(Account general, double amount) throws Exception {
@@ -255,7 +275,7 @@ public class Scenario {
             return 0.0;
         }
 
-        return mExpenses.getExpenses(year);
+        return mExpenses.getExpenses(this, year);
     }
 
     public int getAge(int year, People who) {
@@ -312,7 +332,7 @@ public class Scenario {
     public String showAccountBalances() {
         StringBuilder sb = new StringBuilder();
         for (Account a : mAccounts) {
-            sb.append(String.format("%9.0f", a.getBalance()));
+            sb.append(String.format("%9.0f", (a.getBalance() / 1000.0)));
         }
         return sb.toString();
     }

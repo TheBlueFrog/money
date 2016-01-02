@@ -76,18 +76,26 @@ public class Expenses {
 //        }
     }
 
-    double getExpenses(int year) throws Exception {
+    double getExpenses(Scenario scenario, int year) throws Exception {
 
         if (Simulation.doTest) {
             return 0.0;
         }
 
+        double d = 0.0;
         if (expensesForYear.containsKey(year))
-            return expensesForYear.get(year);
+            d = expensesForYear.get(year);
         else
-            return expensesForYear.get(2047);
+            d = expensesForYear.get(2047);
 
-//        throw new Exception("No expense record for year " + Integer.toString(year));
+        if (Simulation.mCurrentYear > Simulation.mNogaRetireYear) {
+            // add health insurance between retirement and
+            // medicare
+            if (scenario.getAge(Simulation.mCurrentYear, Scenario.People.Noga) < 65)
+                d += 12 * 1000.0;
+        }
+
+        return d;
     }
 
 }

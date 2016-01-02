@@ -13,7 +13,7 @@ public class Simulation {
     // exactly 10 years
     static public boolean doTest = false;
 
-    static public int mStartYear = 2015;
+    static public int mStartYear = 2016;
     static public int mEndYear = 2047;
     public static int mCurrentYear;
 
@@ -79,22 +79,28 @@ public class Simulation {
 //        for (int i = 0; i < mSSASummary.length; ++i)
 //            Main.print(mSSASummary[i]);
 
-        String fieldWidth = "%8s";
-        String format = String.format("%%4s %s%s%s%s%s%s%s%%s", fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth);
-        Main.print(String.format(format,
-                "Year", "Work", "SSA", "MRD", "Taxes", "Expenses", "Liquid", "Assets",
+        String lineSpec = "%4s ";
+        for (int i = 0; i < 8; ++i)
+            lineSpec += "%8.0f";
+        lineSpec += "%s";
+
+        Main.print(String.format(lineSpec.replace("%8.0f", "%8s"),
+                "Year", "Exp", "Taxes", "Tot Out", "SSA", "MRD", "Work", "Liquid", "Assets",
                 mShowAccounts ? mScenario.showAccountNames() : ""));
-        fieldWidth = "%8.0f";
-        format = String.format("%%4s %s%s%s%s%s%s%s%%s", fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth, fieldWidth);
+
+        Main.print(String.format(lineSpec,
+                mCurrentYear - 1,
+                0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0, 0.0,
+                mScenario.getAssets(),
+                mShowAccounts ? mScenario.showAccountBalances() : ""));
 
         mCurrentYear = mStartYear;
         mStop = false;
         while ((mCurrentYear < mEndYear) && ( !mStop)) {
             Account general = mScenario.getGeneralAccount();
 
-            double startOfYearBalance = general.getBalance();
-
-            mScenario.depositInvestmentGain();
+            mScenario.updateAccounts();
 
             double workIncome =   mScenario.depositWorkIncome(general, People.Mike, this)
                                 + mScenario.depositWorkIncome(general, People.Noga, this);
@@ -113,41 +119,46 @@ public class Simulation {
 //                fakeExpenses += mScenario.testDrawDown(general, Account.AccountType.General);
 //            }
 
-            double taxableIncome =   general.getBalance()
-                                   - startOfYearBalance
-                                   - (ssa * 0.15);         // up to 85% of SSA is taxable, apparently
+            double taxableIncome =   workIncome
+                                   + mrd
+                                   + mScenario.getAccountTaxableIncome()
+                                   + (ssa * 0.85);         // only 85% of SSA is taxable, apparently
             double tax = getTax(taxableIncome);
             double taxPaid = taxableIncome * tax;
 
-            // pay taxes
-            general.withdraw(taxPaid);
+            // pay taxes below
 
             mScenario.depositAfterTaxSpecials (general, mCurrentYear);
 
-            // pay expenses
+            // pay expenses and taxes
 
-            double expenses = mScenario.getExpenses(mCurrentYear) + taxPaid;
+            double expenses = mScenario.getExpenses(mCurrentYear);
+            double expensesAndTaxes = expenses + taxPaid;
 
             if (doTest) {
                 double d = (mScenario.getAssets() - general.getBalance()) / (mEndYear - mCurrentYear);
-                expenses += d;
+                expensesAndTaxes += d;
             }
 
             double liquidated = 0.0;
-            if (general.getBalance() < expenses) {
-                liquidated = mScenario.liquidate(general, expenses - general.getBalance());
+            if (general.getBalance() < expensesAndTaxes) {
+                liquidated = mScenario.liquidate(general, expensesAndTaxes - general.getBalance());
                 general.deposit(liquidated);
             }
-            general.withdraw(expenses);
+            general.withdraw(expensesAndTaxes);
 
-            //                 "Year", "Work", "SSA", "MRD", "Taxes", "Expenses", "Liquid", "Assets",
+//          "Year", "Exp", "Taxes", "Tot Out", "Work", "SSA", "MRD", "Liquid", "Assets",
 
-            Main.print(String.format(format,
+            Main.print(String.format(lineSpec,
                     mCurrentYear,
-                    workIncome, ssa, mrd, taxPaid, expenses, liquidated, mScenario.getAssets(),
+                    expenses, taxPaid, expensesAndTaxes,
+                    ssa, mrd, workIncome,
+                    liquidated, mScenario.getAssets(),
                     mShowAccounts ? mScenario.showAccountBalances() : ""));
 
             mCurrentYear++;
+
+            mScenario.endOfYear ();
         }
     }
 

@@ -10,9 +10,10 @@ public class GeneralAccount extends Account{
     }
 
     @Override
-    public void depositInvestmentGain() throws Exception {
+    public void yearlyUpdate() throws Exception {
         double d = getBalance() * 0.002; // nothing
         deposit(d);
+        mChange += d;
     }
 
     @Override

@@ -11,6 +11,7 @@ public abstract class Account {
     private int mID;
     private static int mNextID = 1;
 
+    protected double mChange = 0.0;
     private double mBalance;    // current balance in the account
 
     protected Scenario.People mOwner;
@@ -38,6 +39,9 @@ public abstract class Account {
         return mOwner;
     }
 
+    public void endOfYearReset () {
+        mChange = 0.0;
+    }
     public void withdraw (double amount) throws Exception {
         if (amount < 0.0)
             throw new Exception ("Cannot withdraw negative amounts");
@@ -45,17 +49,23 @@ public abstract class Account {
         if (amount > mBalance)
             throw new Exception ("Insuffient funds for withdrawl");
 
+        mChange -= amount;
         mBalance -= amount;
     }
     public void deposit (double amount) throws Exception {
         if (amount < 0.0)
             throw new Exception("Cannot deposit negative amounts");
 
+        mChange += amount;
         mBalance += amount;
     }
 
-    abstract public void depositInvestmentGain() throws Exception;
+    // some accts gain is taxable some not, that will be computed by
+    // the updateInvestmentGain method
+    public double mYearsTaxableGain = 0.0;
+    abstract public void yearlyUpdate() throws Exception;
 
+    // MRDs are taxable
     abstract public double depositMRD(Account general, Scenario.People who, int age) throws Exception;
 
 }

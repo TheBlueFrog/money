@@ -10,9 +10,10 @@ abstract public class IRA extends Account {
     }
 
     @Override
-    public void depositInvestmentGain() throws Exception {
+    public void yearlyUpdate() throws Exception {
         double d = getBalance() * mScenario.mInterestIncomeRate;
         deposit(d);
+        mChange += d;
     }
 
 }
