@@ -88,12 +88,7 @@ public class Expenses {
         else
             d = expensesForYear.get(2047);
 
-        if (Simulation.mCurrentYear > Simulation.mNogaRetireYear) {
-            // add health insurance between retirement and
-            // medicare
-            if (scenario.getAge(Simulation.mCurrentYear, Scenario.People.Noga) < 65)
-                d += 12 * 1000.0;
-        }
+        d += scenario.getHealthInsurancePremiums (year);
 
         return d;
     }

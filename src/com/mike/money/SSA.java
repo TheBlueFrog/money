@@ -180,8 +180,7 @@ public class SSA {
             int i = fname.indexOf("-r");
             String s = fname.substring(i+2, i+4);
             int age = Integer.parseInt(s);
-            Simulation.mNogaRetireYear = Simulation.NogaBirthYear + age;
-            Main.print(String.format("Noga retires at age %d in %d", age, Simulation.mNogaRetireYear));
+            scenario.setRetireAge ("Noga", age);
         }
 
         Simulation.mSSASummary = collectSummary(lines);
@@ -211,6 +210,9 @@ public class SSA {
 
             SSARec r = new SSARec(split[0], split[3], split[6], split[7]);
             SSARecs[i-1] = r;
+
+            if (r.incomeMike <= 0.0)
+                scenario.setDeathYear("Mike", r.year);
         }
 
 //        checkSpouseAgeToRetire(lines);
@@ -234,16 +236,16 @@ public class SSA {
         return 0;
     }
 
-    private static void checkSpouseAgeToRetire (List<String> lines) throws Exception {
-        for (String line : lines) {
-            if (line.contains("Spouse's Age You Plan to Stop Working")) {
-                String[] a = line.split(",");
-                int i = Integer.parseInt(a[1].replace("\"", "").replace(" ", ""));
-                if (i != (Simulation.mNogaRetireYear - Simulation.NogaBirthYear))
-                    throw new Exception("Wrong year for Noga to retire");
-            }
-        }
-    }
+//    private static void checkSpouseAgeToRetire (List<String> lines) throws Exception {
+//        for (String line : lines) {
+//            if (line.contains("Spouse's Age You Plan to Stop Working")) {
+//                String[] a = line.split(",");
+//                int i = Integer.parseInt(a[1].replace("\"", "").replace(" ", ""));
+//                if (i != (Simulation.mNogaRetireYear - Simulation.NogaBirthYear))
+//                    throw new Exception("Wrong year for Noga to retire");
+//            }
+//        }
+//    }
     private static String[] collectSummary (List<String> lines) throws Exception {
         String[] sum = new String[3];
         for (int i = 0; i < lines.size(); ++i) {
@@ -258,7 +260,7 @@ public class SSA {
         return null;
     }
 
-    public static double getIncome(Account general, int year, Scenario.People who) throws Exception {
+    public static double getIncome(Account general, int year, String who) throws Exception {
         if (year < SSARecs[0].year)
             return 0.0;
 
@@ -274,9 +276,9 @@ public class SSA {
                 ++i;
         }
 
-        if (who.equals(Scenario.People.Mike))
+        if (who.equals("Mike"))
             income = SSARecs[i].incomeMike;
-        if (who.equals(Scenario.People.Noga))
+        if (who.equals("Noga"))
             income = SSARecs[i].incomeNoga;
 
         general.deposit(income);

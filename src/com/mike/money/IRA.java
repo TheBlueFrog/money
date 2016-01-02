@@ -5,8 +5,8 @@ package com.mike.money;
  */
 abstract public class IRA extends Account {
 
-    protected IRA(Scenario s, String name, Scenario.People owner, double balance) {
-        super(s, name, owner, balance);
+    protected IRA(Scenario s, String name, double balance) {
+        super(s, name, balance);
     }
 
     @Override

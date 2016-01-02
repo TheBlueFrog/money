@@ -5,8 +5,8 @@ package com.mike.money;
  */
 public class GeneralAccount extends Account{
 
-    public GeneralAccount(Scenario s, String name, Scenario.People owner, double balance) {
-        super(s, name, owner, balance);
+    public GeneralAccount(Scenario s, String name, double balance) {
+        super(s, name, balance);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class GeneralAccount extends Account{
     }
 
     @Override
-    public double depositMRD(Account general, Scenario.People who, int age) throws Exception {
+    public double depositMRD(Account general, int age) throws Exception {
         // doesn't apply
         return 0;
     }

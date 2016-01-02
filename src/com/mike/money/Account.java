@@ -14,16 +14,13 @@ public abstract class Account {
     protected double mChange = 0.0;
     private double mBalance;    // current balance in the account
 
-    protected Scenario.People mOwner;
-
-    protected Account(Scenario s, String name, Scenario.People owner, double balance) {
+    protected Account(Scenario s, String name, double balance) {
 
         mID = mNextID++;
         mScenario = s;
 
         mName = name;
         mBalance = balance;
-        mOwner = owner;
     }
 
     public int getID () {
@@ -34,9 +31,6 @@ public abstract class Account {
     }
     public double getBalance() {
         return mBalance;
-    }
-    public Scenario.People getOwner() {
-        return mOwner;
     }
 
     public void endOfYearReset () {
@@ -66,6 +60,6 @@ public abstract class Account {
     abstract public void yearlyUpdate() throws Exception;
 
     // MRDs are taxable
-    abstract public double depositMRD(Account general, Scenario.People who, int age) throws Exception;
+    abstract public double depositMRD(Account general, int age) throws Exception;
 
 }

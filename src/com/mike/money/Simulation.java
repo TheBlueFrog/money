@@ -6,8 +6,6 @@ import static com.mike.money.Scenario.*;
  * Created by mike on 12/19/2015.
  */
 public class Simulation {
-    public static final int MikeBirthYear = 1948;
-    static public final int NogaBirthYear = 1957;
 
     // if this is true then we run a test that should "go broke" in
     // exactly 10 years
@@ -18,7 +16,6 @@ public class Simulation {
     public static int mCurrentYear;
 
     public static boolean mStop = true;
-    public static int mNogaRetireYear = 0;
     public static String[] mSSASummary = null;
 
     private Scenario mScenario;
@@ -102,14 +99,11 @@ public class Simulation {
 
             mScenario.updateAccounts();
 
-            double workIncome =   mScenario.depositWorkIncome(general, People.Mike, this)
-                                + mScenario.depositWorkIncome(general, People.Noga, this);
+            double workIncome = mScenario.depositWorkIncome(this, general);
 
-            double mrd =  depositIRAIncome(general, People.Mike)
-                        + depositIRAIncome(general, People.Noga);
+            double mrd = mScenario.depositMRD(this, general, mCurrentYear);
 
-            double ssa =   depositSSAIncome(general, People.Mike)
-                         + depositSSAIncome(general, People.Noga);
+            double ssa = mScenario.depositSSAIncome(this, general);
 
 //            double fakeExpenses = 0.0;
 //            if (doTest) {
@@ -189,18 +183,6 @@ public class Simulation {
             tax = 0.28;
 
         return tax;
-    }
-
-    /**
-     * @param who
-     * @return minimum distribution income from IRA
-     */
-    private double depositIRAIncome(Account general, People who) throws Exception {
-        return mScenario.depositMRD(general, mCurrentYear, who);
-    }
-
-    private double depositSSAIncome(Account general, People who) throws Exception {
-        return SSA.getIncome(general, mCurrentYear, who);
     }
 
 
