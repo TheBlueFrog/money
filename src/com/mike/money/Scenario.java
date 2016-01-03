@@ -118,10 +118,11 @@ public class Scenario {
                 p.addToStock (v);
     }
 
-    public void depositAfterTaxSpecials(Account general, int year) throws Exception {
+    public void depositAfterTaxSpecials(int year) throws Exception {
+        Account a = getTradingAccount();
         if (specials.containsKey(year))
             for (double d : specials.get(year))
-                general.deposit(d);
+                a.deposit(d);
     }
 
     /**
@@ -140,6 +141,9 @@ public class Scenario {
 
     public Account getGeneralAccount() throws Exception {
         return findAccount (Simulation.doTest ? "Bank" : "Wells Fargo");
+    }
+    public Account getTradingAccount() throws Exception {
+        return findAccount (Simulation.doTest ? "Bank" : "Trading Ameritrade");
     }
 
     private Account findAccount(String s) throws Exception {

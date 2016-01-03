@@ -122,7 +122,7 @@ public class Simulation {
 
             // pay taxes below
 
-            mScenario.depositAfterTaxSpecials (general, mCurrentYear);
+            mScenario.depositAfterTaxSpecials (mCurrentYear);
 
             // pay expenses and taxes
 
