@@ -78,10 +78,6 @@ public class Expenses {
 
     double getExpenses(Scenario scenario, int year) throws Exception {
 
-        if (Simulation.doTest) {
-            return 0.0;
-        }
-
         double d = 0.0;
         if (expensesForYear.containsKey(year))
             d = expensesForYear.get(year);

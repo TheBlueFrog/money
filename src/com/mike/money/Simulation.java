@@ -7,44 +7,38 @@ import static com.mike.money.Scenario.*;
  */
 public class Simulation {
 
-    // if this is true then we run a test that should "go broke" in
-    // exactly 10 years
-    static public boolean doTest = false;
-
     static public int mStartYear = 2016;
     static public int mEndYear = 2047;
     public static int mCurrentYear;
 
+    // state of simulation
     public static boolean mStop = true;
+
     public static String[] mSSASummary = null;
 
-    private Scenario mScenario;
+    // factor in state income tax
+    private boolean mNoStateTax = false;
 
     // show all accounts
     private boolean mShowAccounts = false;
+
+    private Scenario mScenario;
 
     public Scenario getScenario () {
         return mScenario;
     }
 
     public Simulation(String[] args) throws Exception {
-        for (String s : args)
-            if (s.contains("-test"))
-                doTest = true;
 
-        if (doTest) {
-            mStartYear = 2000;
-            mEndYear = mStartYear + 10 + 1;
-            mShowAccounts = true;
-        }
-        else {
-            for (int i = 0; i < args.length; ++i) {
-                String arg = args[i];
-                if (arg.equals("-showAccounts"))
-                    mShowAccounts = true;
+        for (int i = 0; i < args.length; ++i) {
+            String arg = args[i];
+            if (arg.equals("-showAccounts"))
+                mShowAccounts = true;
+            if (arg.equals("-noStateTax"))
+                mNoStateTax = true;
+
 //                if (arg.equals("-nogaRetire"))
 //                    mNogaRetireYear = Integer.parseInt(args[++i]);
-            }
         }
 
         mScenario = new Scenario(args);
@@ -129,11 +123,6 @@ public class Simulation {
             double expenses = mScenario.getExpenses(mCurrentYear);
             double expensesAndTaxes = expenses + taxPaid;
 
-            if (doTest) {
-                double d = (mScenario.getAssets() - general.getBalance()) / (mEndYear - mCurrentYear);
-                expensesAndTaxes += d;
-            }
-
             double liquidated = 0.0;
             if (general.getBalance() < expensesAndTaxes) {
                 liquidated = mScenario.liquidate(general, expensesAndTaxes - general.getBalance());
@@ -157,10 +146,6 @@ public class Simulation {
     }
 
     private double getTax(double taxableIncome) {
-
-        if (doTest)
-            return 0.1;
-
         /*
         as of 2015, married filing jointly
 
@@ -181,6 +166,10 @@ public class Simulation {
             tax = 0.25;
         else
             tax = 0.28;
+
+        if ( ! mNoStateTax)
+            tax += 0.035;        // NM is 4.9, AZ is 4.6 gross
+                                        // NM calc says effective rate is 3.5%
 
         return tax;
     }

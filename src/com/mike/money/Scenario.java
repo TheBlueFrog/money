@@ -61,16 +61,17 @@ public class Scenario {
     }
 
     private void initSpecialsIncome (String[] args) {
-        for(String s : args)
-            if (s.equals("-noSpecials")) {
-                Main.print("No special after-tax income");
+        for(int i = 0; i < args.length; ) {
+            String s = args[i++];
+            if (s.equals("-specialInc")) {
+
+                int year = Integer.parseInt(args[i++]);
+                List<Double> x = new ArrayList<Double>();
+                x.add(Double.parseDouble(args[i++]));
+                specials.put(year, x);
                 return;
             }
-
-        List<Double> x = new ArrayList<Double>();
-        x.add(300000.0);      // net after downsizing house
-
-        specials.put(2018, x);
+        }
     }
 
     public Scenario(String[] args) throws Exception {
@@ -140,10 +141,10 @@ public class Scenario {
     }
 
     public Account getGeneralAccount() throws Exception {
-        return findAccount (Simulation.doTest ? "Bank" : "Wells Fargo");
+        return findAccount ("Wells Fargo");
     }
     public Account getTradingAccount() throws Exception {
-        return findAccount (Simulation.doTest ? "Bank" : "Trading Ameritrade");
+        return findAccount ("Trading Ameritrade");
     }
 
     private Account findAccount(String s) throws Exception {
@@ -222,10 +223,6 @@ public class Scenario {
     }
 
     public double getExpenses(int year) throws Exception {
-        if (Simulation.doTest) {
-            return 0.0;
-        }
-
         return mExpenses.getExpenses(this, year);
     }
 

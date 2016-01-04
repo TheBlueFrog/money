@@ -83,18 +83,12 @@ class MRDTable {
     }
 
     static public double getMRD(int age, TraditionalIRA account) throws Exception {
-        if (Simulation.doTest) {
-            // take a 1/10 mrd, that's not enough to drain it so
-            // we test the liquidation code also
-            return account.getBalance() / 10.0;
-        }
-        else {
-            double lifeExp = account.getLifeExpectancy(age);
-            if (lifeExp > 0)
-                return account.getBalance() / lifeExp;
 
-            return 0.0;
-        }
+        double lifeExp = account.getLifeExpectancy(age);
+        if (lifeExp > 0)
+            return account.getBalance() / lifeExp;
+
+        return 0.0;
     }
 
 
