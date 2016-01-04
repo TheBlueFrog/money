@@ -94,7 +94,7 @@ public class Simulation {
 
         mCurrentYear = mStartYear;
         mStop = false;
-        while ((mCurrentYear < mEndYear) && ( !mStop)) {
+        while ((mCurrentYear <= mEndYear) && ( !mStop)) {
             Account general = mScenario.getGeneralAccount();
 
             mScenario.updateAccounts();
