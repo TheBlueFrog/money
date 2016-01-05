@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9a15c13-c0e8-4902-b1dc-00c18dd9438b" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/SSAnalyze-r62-f70.csv" afterPath="$PROJECT_DIR$/SSAnalyze-r62.csv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/SSAnalyze-r65-f70.csv" afterPath="$PROJECT_DIR$/SSAnalyze-r65.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Expenses.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Expenses.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Account.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Account.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/IRA.java" afterPath="$PROJECT_DIR$/src/com/mike/money/IRA.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/MRDTable.java" afterPath="$PROJECT_DIR$/src/com/mike/money/MRDTable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Scenario.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Scenario.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/Simulation.java" afterPath="$PROJECT_DIR$/src/com/mike/money/Simulation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/TradingAccount.java" afterPath="$PROJECT_DIR$/src/com/mike/money/TradingAccount.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mike/money/TraditionalIRA.java" afterPath="$PROJECT_DIR$/src/com/mike/money/TraditionalIRA.java" />
     </list>
     <ignored path="money.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,14 +52,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Scenario.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Scenario.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/mike/money/Scenario.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0963597">
-              <caret line="65" column="37" selection-start-line="65" selection-start-column="27" selection-end-line="65" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding>
-                <element signature="e#2689#2697#0" expanded="true" />
+                <element signature="e#2498#2506#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Account.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mike/money/Account.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="66" column="30" selection-start-line="66" selection-start-column="30" selection-end-line="66" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GeneralAccount.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mike/money/GeneralAccount.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -69,17 +88,37 @@
         <entry file="file://$PROJECT_DIR$/src/com/mike/money/MRDTable.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Person.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mike/money/Person.java">
+      <file leaf-file-name="Expenses.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mike/money/Expenses.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+              <caret line="32" column="102" selection-start-line="32" selection-start-column="102" selection-end-line="32" selection-end-column="102" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SSAnalyze-r65.csv" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SSAnalyze-r65.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3872093">
+              <caret line="31" column="7" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TraditionalIRA.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mike/money/TraditionalIRA.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -136,10 +175,8 @@
         <option value="$PROJECT_DIR$/roi-3-r62-f70.txt" />
         <option value="$PROJECT_DIR$/roi-2-r62-f70.txt" />
         <option value="$PROJECT_DIR$/SSAnalyze-r62-f70.csv" />
-        <option value="$PROJECT_DIR$/src/com/mike/money/Account.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/GeneralAccount.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/IRA.java" />
-        <option value="$PROJECT_DIR$/src/com/mike/money/TraditionalIRA.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/InheritedTraditionalIRA.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/TradingAccount.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/RothIRA.java" />
@@ -147,9 +184,11 @@
         <option value="$PROJECT_DIR$/src/com/mike/money/Person.java" />
         <option value="$PROJECT_DIR$/arun.bat" />
         <option value="$PROJECT_DIR$/src/com/mike/money/Expenses.java" />
-        <option value="$PROJECT_DIR$/src/com/mike/money/MRDTable.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/Simulation.java" />
         <option value="$PROJECT_DIR$/src/com/mike/money/Scenario.java" />
+        <option value="$PROJECT_DIR$/src/com/mike/money/Account.java" />
+        <option value="$PROJECT_DIR$/src/com/mike/money/TraditionalIRA.java" />
+        <option value="$PROJECT_DIR$/src/com/mike/money/MRDTable.java" />
       </list>
     </option>
   </component>
@@ -662,11 +701,12 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21260816" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23986487" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22311495" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44256756" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44256756" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -674,7 +714,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16007416" sideWeight="0.5038251" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16007416" sideWeight="0.49617487" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23986487" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -724,19 +763,19 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/mike/money/Account.java</url>
-          <line>40</line>
+          <line>47</line>
           <properties />
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/mike/money/Scenario.java</url>
-          <line>314</line>
+          <line>305</line>
           <properties />
           <option name="timeStamp" value="119" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/mike/money/Scenario.java</url>
-          <line>67</line>
+          <line>58</line>
           <properties />
           <option name="timeStamp" value="138" />
         </line-breakpoint>
@@ -805,7 +844,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding>
-            <element signature="e#2689#2697#0" expanded="true" />
+            <element signature="e#2498#2506#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -887,21 +926,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SSAnalyze-r65.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="7" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Account.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mike/money/IRA.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -910,13 +934,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mike/money/TradingAccount.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mike/money/TraditionalIRA.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
@@ -934,13 +951,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mike/money/GeneralAccount.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1070,22 +1080,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Expenses.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="80" column="11" selection-start-line="80" selection-start-column="11" selection-end-line="80" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mike/money/MRDTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mike/money/Person.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1120,11 +1114,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mike/money/Scenario.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0963597">
-          <caret line="65" column="37" selection-start-line="65" selection-start-column="27" selection-end-line="65" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
-            <element signature="e#2689#2697#0" expanded="true" />
+            <element signature="e#2498#2506#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Account.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="30" selection-start-line="66" selection-start-column="30" selection-end-line="66" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mike/money/GeneralAccount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mike/money/TraditionalIRA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mike/money/MRDTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mike/money/Expenses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="102" selection-start-line="32" selection-start-column="102" selection-end-line="32" selection-end-column="102" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SSAnalyze-r65.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3872093">
+          <caret line="31" column="7" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>

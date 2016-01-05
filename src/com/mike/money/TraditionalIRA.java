@@ -11,7 +11,13 @@ public class TraditionalIRA extends IRA {
     @Override
     public double depositMRD(Account general, int age) throws Exception {
 
-        double mrd = MRDTable.getMRD(age, this);
+        double mrd = 0.0;
+
+        {
+            double lifeExp = getLifeExpectancy(age);
+            if (lifeExp > 0)
+                mrd = getBalance() / lifeExp;
+        }
 
         if (mrd > getBalance())
             mrd = getBalance();
@@ -22,7 +28,7 @@ public class TraditionalIRA extends IRA {
         return mrd;
     }
 
-    public double getLifeExpectancy(int age) throws Exception {
+    private double getLifeExpectancy(int age) throws Exception {
         if (age >= 70)
             return MRDTable.getIRAMRDLifeExpectancy(age);
 

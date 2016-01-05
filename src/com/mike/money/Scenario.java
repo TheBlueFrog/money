@@ -7,22 +7,13 @@ import java.util.*;
  */
 public class Scenario {
 
-
     private Map<Integer, List<Double>> specials = new HashMap<Integer, List<Double>>();
 
     private List<Person> mPeople = new ArrayList<Person>();
 
-    public double mInterestIncomeRate = 0.010;
-
-//    private List<Account> mAccounts = new ArrayList<Account>();
+    public double mInvestmentIncomeRate = 0.010;
 
     private Expenses mExpenses;
-
-    /*
-    The three major areas of difference between a 401(k) and a Roth IRA are tax treatment, investment
-    options and possible employer contributions.
-     */
-
 
     // setup default data for run
     // the ordering is the order displayed
@@ -57,14 +48,14 @@ public class Scenario {
         mPeople.add(mike);
         mPeople.add(noga);
 
-        initSpecialsIncome(args);
+        initSpecialIncome(args);
     }
 
-    private void initSpecialsIncome (String[] args) {
+    private void initSpecialIncome(String[] args) {
         for(int i = 0; i < args.length; ) {
             String s = args[i++];
             if (s.equals("-specialInc")) {
-
+                // -specialInc year amount ...
                 int year = Integer.parseInt(args[i++]);
                 List<Double> x = new ArrayList<Double>();
                 x.add(Double.parseDouble(args[i++]));
@@ -86,7 +77,7 @@ public class Scenario {
         for (int i = 0; i < args.length; ++i) {
             String arg = args[i];
             if (arg.equals("-roi"))
-                mInterestIncomeRate = Double.parseDouble(args[++i]);
+                mInvestmentIncomeRate = Double.parseDouble(args[++i]);
 
 //            if (arg.equals("-noStock")) {
 //                mAccounts.get("College").setBalance(0.0);
@@ -215,7 +206,7 @@ public class Scenario {
 
     public void print() {
 //        Main.simulation.print(String.format("Initial investment $%.0f", getAssets()));
-        Main.print(String.format("Annual investment income rate %.4f", mInterestIncomeRate));
+        Main.print(String.format("Annual investment income rate %.4f", mInvestmentIncomeRate));
 //        Main.simulation.print(String.format("Start-end years: %d-%d", Simulation.mStartYear, Simulation.mEndYear));
     }
     public void print(String s) {

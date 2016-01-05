@@ -5,6 +5,12 @@ package com.mike.money;
  */
 public abstract class Account {
 
+     /*
+    The three major areas of difference between a 401(k) and a Roth IRA are tax treatment, investment
+    options and possible employer contributions.
+     */
+
+
     private final String mName;
     protected final Scenario mScenario;
 
@@ -36,6 +42,7 @@ public abstract class Account {
     public void endOfYearReset () {
         mChange = 0.0;
     }
+
     public void withdraw (double amount) throws Exception {
         if (amount < 0.0)
             throw new Exception ("Cannot withdraw negative amounts");
