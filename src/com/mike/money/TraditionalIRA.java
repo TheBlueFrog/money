@@ -28,7 +28,7 @@ public class TraditionalIRA extends IRA {
         return mrd;
     }
 
-    private double getLifeExpectancy(int age) throws Exception {
+    protected double getLifeExpectancy(int age) throws Exception {
         if (age >= 70)
             return MRDTable.getIRAMRDLifeExpectancy(age);
 

@@ -69,4 +69,12 @@ public abstract class Account {
     // MRDs are taxable
     abstract public double depositMRD(Account general, int age) throws Exception;
 
+    public boolean matches(String s, boolean loose) {
+        if (loose) {
+            return getName().contains(s);
+        }
+        else {
+            return getName().equals(s);
+        }
+    }
 }

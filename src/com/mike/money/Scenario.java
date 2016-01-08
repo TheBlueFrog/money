@@ -1,5 +1,7 @@
 package com.mike.money;
 
+import javafx.util.Pair;
+
 import java.util.*;
 
 /**
@@ -7,7 +9,7 @@ import java.util.*;
  */
 public class Scenario {
 
-    private Map<Integer, List<Double>> specials = new HashMap<Integer, List<Double>>();
+    private Map<Integer, List<Pair<Account, Double>>> specials = new HashMap<Integer, List<Pair<Account, Double>>>();
 
     private List<Person> mPeople = new ArrayList<Person>();
 
@@ -18,7 +20,7 @@ public class Scenario {
     // setup default data for run
     // the ordering is the order displayed
 
-    private void init (String[] args) {
+    private void init (String[] args) throws Exception {
 
         List<Account> mikesAccounts = new ArrayList<Account>();
         List<Account> nogasAccounts = new ArrayList<Account>();
@@ -51,14 +53,19 @@ public class Scenario {
         initSpecialIncome(args);
     }
 
-    private void initSpecialIncome(String[] args) {
+    private void initSpecialIncome(String[] args) throws Exception {
         for(int i = 0; i < args.length; ) {
             String s = args[i++];
             if (s.equals("-specialInc")) {
-                // -specialInc year amount ...
+                // -specialInc year account amount ...
+
                 int year = Integer.parseInt(args[i++]);
-                List<Double> x = new ArrayList<Double>();
-                x.add(Double.parseDouble(args[i++]));
+
+                Account a = findAccount(args[i++], true);
+
+                List<Pair<Account, Double>> x = new ArrayList<Pair<Account, Double>>();
+                x.add(new Pair<Account, Double>(a, Double.parseDouble(args[i++])));
+
                 specials.put(year, x);
                 return;
             }
@@ -111,10 +118,12 @@ public class Scenario {
     }
 
     public void depositAfterTaxSpecials(int year) throws Exception {
-        Account a = getTradingAccount();
         if (specials.containsKey(year))
-            for (double d : specials.get(year))
+            for (Pair<Account, Double> s : specials.get(year)) {
+                Account a = s.getKey();
+                double d = s.getValue();
                 a.deposit(d);
+            }
     }
 
     /**
@@ -138,10 +147,25 @@ public class Scenario {
         return findAccount ("Trading Ameritrade");
     }
 
+    /**
+     * @param s
+     * @return matching account
+     * @throws Exception
+     */
     private Account findAccount(String s) throws Exception {
+        return findAccount(s, false);
+    }
+
+    /**
+     * @param s
+     * @param loose
+     * @return like above but looser matching
+     * @throws Exception
+     */
+    private Account findAccount(String s, boolean loose) throws Exception {
         for(Person p : mPeople)
-            if (p.hasAccount (s))
-                return p.getAccount(s);
+            if (p.hasAccount(s, loose))
+                return p.getMatchingAccount(s, loose);
 
         throw new Exception("Unknown account " + s);
     }

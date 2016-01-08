@@ -70,19 +70,22 @@ public class Simulation {
 //        for (int i = 0; i < mSSASummary.length; ++i)
 //            Main.print(mSSASummary[i]);
 
+        double previousTotal = mScenario.getAssets();
+
         String lineSpec = "%4s ";
-        for (int i = 0; i < 8; ++i)
+        for (int i = 0; i < 9; ++i)
             lineSpec += "%8.0f";
         lineSpec += "%s";
 
         Main.print(String.format(lineSpec.replace("%8.0f", "%8s"),
-                "Year", "Exp", "Taxes", "Tot Out", "SSA", "MRD", "Work", "Liquid", "Assets",
+                "Year", "Exp", "Taxes", "Tot Out", "SSA", "MRD", "Work", "Gain", "Liquid", "Assets",
                 mShowAccounts ? mScenario.showAccountNames() : ""));
 
         Main.print(String.format(lineSpec,
                 mCurrentYear - 1,
                 0.0, 0.0, 0.0,
                 0.0, 0.0, 0.0, 0.0,
+                0.0,
                 mScenario.getAssets(),
                 mShowAccounts ? mScenario.showAccountBalances() : ""));
 
@@ -136,11 +139,12 @@ public class Simulation {
                     mCurrentYear,
                     expenses, taxPaid, expensesAndTaxes,
                     ssa, mrd, workIncome,
+                    mScenario.getAssets() - previousTotal,
                     liquidated, mScenario.getAssets(),
                     mShowAccounts ? mScenario.showAccountBalances() : ""));
 
             mCurrentYear++;
-
+            previousTotal = mScenario.getAssets();
             mScenario.endOfYear ();
         }
     }

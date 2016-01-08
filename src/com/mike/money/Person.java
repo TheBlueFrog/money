@@ -156,17 +156,25 @@ public class Person {
         return SSA.getIncome(general, simulation.mCurrentYear, mName);
     }
 
-    public boolean hasAccount(String s) {
+    public boolean hasAccount(String s) throws Exception {
+        return hasAccount(s, false);
+    }
+
+    public boolean hasAccount(String s, boolean loose) throws Exception {
         for (Account a : mAccounts)
-            if (s.equals(a.getName()))
+            if (a.matches(s, loose))
                 return true;
 
         return false;
     }
 
+
     public Account getAccount(String s) throws Exception {
+        return getMatchingAccount(s, false);
+    }
+    public Account getMatchingAccount(String s, boolean loose) throws Exception {
         for (Account a : mAccounts)
-            if (s.equals(a.getName()))
+            if (a.matches (s, loose))
                 return a;
 
         throw new Exception("No such account");
