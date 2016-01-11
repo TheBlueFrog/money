@@ -22,30 +22,32 @@ public class Scenario {
 
     private void init (String[] args) throws Exception {
 
-        List<Account> mikesAccounts = new ArrayList<Account>();
-        List<Account> nogasAccounts = new ArrayList<Account>();
+        List<Account> mikes = new ArrayList<Account>();
+        List<Account> nogas = new ArrayList<Account>();
 
-        mikesAccounts.add(new GeneralAccount(this, "Wells Fargo",        40000.0));       // as of 12/31/2015
-        mikesAccounts.add(new TradingAccount(this, "College Wells",      (48027.0 * 3))); // "
-        mikesAccounts.add(new TradingAccount(this, "Trading Ameritrade", 52043.0));       // "
+        mikes.add(new GeneralAccount(this, "Wells Fargo",         40000.0));       // as of 12/31/2015
+        mikes.add(new TradingAccount(this, "College Wells",       (48027.0 * 3))); // "
+        mikes.add(new TradingAccount(this, "Trading Ameritrade",   52043.0));      // "
 
-        mikesAccounts.add(new TradingAccount(this, "eBay stock eTrade",  43443.0));        // "
-        mikesAccounts.add(new TraditionalIRA(this, "eBay 401 Schwab",    72693.0));        // "  roi -2.9%
+        mikes.add(new TradingAccount(this, "eBay stock eTrade",   43443.0));       // "
+        mikes.add(new TraditionalIRA(this, "eBay 401 Schwab",     72693.0));       // "  roi -2.9%
 
         // this literal is used somewhere
-        nogasAccounts.add(new TradingAccount(this, "Intel stock ? ",     2000.0));         // <<<<<<<<<<<<<<<<<<<<< guess
-        nogasAccounts.add(new TraditionalIRA(this, "Intel 401 Fidelity", 3661.0));         // "
+        nogas.add(new TradingAccount(this, "Intel stock ? ",       2000.0));       // <<<<<<<<<<<<<<<<<<<<< guess
+        nogas.add(new TraditionalIRA(this, "Intel 401 Fidelity",   3661.0));       // "
 
-        mikesAccounts.add(new InheritedTraditionalIRA(this, "Securion",  134654.0));       // " roi 3%
-        mikesAccounts.add(new InheritedTraditionalIRA(this, "TIAA",      65560.0));        // " roi 1.5%
+        mikes.add(new InheritedTraditionalIRA(this, "Securion",  134654.0));       // " roi 3%
+        mikes.add(new InheritedTraditionalIRA(this, "TIAA",       65560.0));       // " roi 1.5%
 
-        mikesAccounts.add(new TraditionalIRA(this, "IRA M Ameritrade",   6248.0));         // "
-        nogasAccounts.add(new TraditionalIRA(this, "IRA N Ameritrade",   2375.0));         // "
-        nogasAccounts.add(new TraditionalIRA(this, "IRA N UBS",          8031.0));         // "
-        mikesAccounts.add(new RothIRA(this,        "Roth M Ameritrade",  15842.0));        // "
+        mikes.add(new TraditionalIRA(this, "IRA M Ameritrade",     6248.0));       // "
+        nogas.add(new TraditionalIRA(this, "IRA N Ameritrade",     2375.0));       // "
+        nogas.add(new TraditionalIRA(this, "IRA N UBS",            8031.0));       // "
 
-        Person mike = new Person("Mike", 1948, mikesAccounts);
-        Person noga = new Person("Noga", 1957, nogasAccounts);
+        mikes.add(new RothIRA(this,        "Roth M Ameritrade",   15842.0));       // "
+        nogas.add(new RothIRA(this,        "Roth N eTrade",        5832.0));       // as of 1/11/16
+
+        Person mike = new Person("Mike", 1948, mikes);
+        Person noga = new Person("Noga", 1957, nogas);
 
         mPeople.add(mike);
         mPeople.add(noga);
@@ -67,7 +69,6 @@ public class Scenario {
                 x.add(new Pair<Account, Double>(a, Double.parseDouble(args[i++])));
 
                 specials.put(year, x);
-                return;
             }
         }
     }
